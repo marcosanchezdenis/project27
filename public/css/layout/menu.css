@@ -1,0 +1,110 @@
+/* ****************************************************************** */
+/* Configuracion del MENU */
+/* ****************************************************************** */
+#sub-menu {
+	min-height: 30px;
+	color: white;
+	font-weight: bold;
+	background-color: #7FBFE7;
+	display: none;
+}
+
+#menu {
+	min-height: 30px;
+    color: white;
+    font-weight: bold;
+    background-color: #223359;
+}
+
+#menu-container {
+    height: 30px;
+    clear: both;
+}
+
+/* Todas las listas con clase menu-bar (menus y submenus) */
+ul.menu-bar {
+    float: left;
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+/* Para los elementos dentro de las listas con clase menu-bar */
+ul.menu-bar li {
+    display: inline;
+	text-align: center;
+}
+
+/* Para todos los links dentro de los items */
+ul.menu-bar li a {
+    float: left;
+    line-height: 30px;
+    color: inherit;
+    text-decoration: none;
+	width: 150px;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.menu-bar li a[class="last"] {
+	float: right;
+	line-height: 30px;
+    color: inherit;
+    text-decoration: none;
+    width: 150px;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Al situarse sobre un elemento de la lista */
+ul.menu-bar .current a, ul.menu-bar li:hover > a {
+	color: #223359;
+	font-weight: bold;
+	text-decoration: none;
+    background-color: #7FBFE7;
+}
+
+/* Para todos los sub-menus */
+ul.menu-bar ul {
+    display: none;
+	background-color: #7FBFE7;
+}
+
+/* Para todas las listas dentro del item seleccionado */
+ul.menu-bar li:hover > ul {
+    position: absolute;
+    display: block;
+    width: auto;
+    height: 30px;
+    position: absolute;
+    margin: 30px 0px 0px 0px;
+}
+
+/* Para los links dentro de las listas del item seleccionado */
+ul.menu-bar li:hover > ul li a {
+    float: left;
+    line-height: 30px;
+    color: inherit;
+	width: 150px;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+ul.menu-bar li:hover > ul li a[class="last"] {
+    float: right;
+    line-height: 30px;
+    color: inherit;
+    width: 150px;
+    text-decoration: none;
+    margin: 0px;
+    padding: 0px;
+	margin-right: 18px;
+}
+
+ul.menu-bar li:hover > ul li a:hover {
+    color: #223359;
+	font-weight: bold;
+	background-color: #00AEF0;
+}

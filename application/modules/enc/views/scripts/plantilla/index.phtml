@@ -1,0 +1,96 @@
+<?php $this->headTitle()->prepend('Plantillas'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/index.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/enc/plantilla/index.js')); ?>
+
+<form class="search-form" action="index" method="post">
+    <label for="nombre">Plantilla: </label>
+	<input type="text" name="nombre" id="nombre" />
+	
+	<input type="submit" value="BUSCAR" />
+	<hr class="separator" />
+</form>
+
+<a class="standard-button" href="crear" title="Crear Nueva Plantilla">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR PLANTILLA
+</a>
+
+<br />
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->plantillas)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin plantillas.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">PLANTILLA</th>
+                <th width="42%">DESCRIPCION</th>
+                <th width="14%">ULTIMA MODIF.</th>
+                <th width="8">HABILITADA</th>
+                <th width="8%">EDITAR</th>
+                <th width="8%">ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->plantillas as $encuesta): ?>
+            <tr>
+                <td>
+                    <a class="get-link" href="get?id=<?php echo $encuesta["encuesta_id"]; ?>" title="Visualizar Plantilla">
+                        <?php echo $encuesta["nombre"]; ?>
+                    </a>
+                </td>
+                <td><?php echo $encuesta["descripcion"]; ?></td>
+                <td style="text-align: center"><?php echo $encuesta["fecha"]; ?></td>
+                <td style="text-align: center;">
+                    <a href="activar?id=<?php echo $encuesta["encuesta_id"]; ?>">
+                    <?php if ($encuesta["activo"] == 'S'): ?>
+                        <img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Clic para deshabilitar" />
+                    <?php else: ?>
+                        <img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Clic para habilitar" />
+                    <?php endif; ?>
+                    </a>
+                </td>
+                <td style="text-align: center">
+            	<?php if ($encuesta["activo"] == 'S'): ?>
+                	<a title="Solo se pueden editar plantillas no activas">
+				<?php else: ?>
+                    <a href="editar?id=<?php echo $encuesta["encuesta_id"]; ?>" title="Clic para editar">
+                <?php endif; ?>
+                        <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+                    </a>
+                </td>
+                <td style="text-align: center">
+                <?php if ($encuesta["activo"] == 'S'): ?>
+                    <a title="Solo se pueden eliminar plantillas no activas">
+            	<?php else: ?>
+                	<a class="delete-button" href="borrar?id=<?php echo $encuesta["encuesta_id"]; ?>" title="Clic para borrar">
+                    <?php endif; ?>
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crear Nueva Plantilla">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR PLANTILLA
+</a>
+<br /><br /><br />
+
+<?php if (count($this->errors)): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $error): ?>
+    	<li><?php echo $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

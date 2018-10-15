@@ -1,0 +1,89 @@
+<?php $this->headTitle()->prepend('Editar Encuesta'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+
+<form action="editar" method="post">
+	<fieldset>
+		<legend>NUEVA ENCUESTA</legend>
+		
+		<input type="hidden" name="enc_particular_id" id="enc_particular_id" value="<?php echo $this->encuesta["enc_particular_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="<?php echo $this->encuesta["activo"]; ?>" />
+		
+		<label for="encuesta_id">PLANTILLA<span class="required-field"> * </span></label>
+		<select id="encuesta_id" name="encuesta_id" tabindex="1">
+		    <?php foreach ($this->plantillas as $plantilla): ?>
+		        <option value="<?php echo $plantilla["encuesta_id"] ?>" <?php echo ($this->encuesta["encuesta_id"] == $plantilla["encuesta_id"] ? 'selected="selected"' : null); ?>><?php echo $plantilla["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<label for="periodo_lectivo_id">PER. LECTIVO<span class="required-field"> * </span></label>
+		<select id="periodo_lectivo_id" name="periodo_lectivo_id" tabindex="2">
+		    <?php foreach ($this->periodos as $periodo): ?>
+		        <option value="<?php echo $periodo["periodo_lectivo_id"] ?>" <?php echo ($this->encuesta["periodo_lectivo_id"] == $periodo["periodo_lectivo_id"] ? 'selected="selected"' : null); ?>><?php echo $periodo["periodo"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<label for="asignatura_id">ASIGNATURA<span class="required-field"> * </span></label>
+		<select id="asignatura_id" name="asignatura_id" tabindex="3">
+		    <?php foreach ($this->asignaturas as $asignatura): ?>
+		        <option value="<?php echo $asignatura["asignatura_id"] ?>" <?php echo ($this->encuesta["asignatura_id"] == $asignatura["asignatura_id"] ? 'selected="selected"' : null); ?>><?php echo $asignatura["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<label for="docente_id">DOCENTE<span class="required-field"> * </span></label>
+		<select id="docente_id" name="docente_id" tabindex="4">
+		    <?php foreach ($this->docentes as $docente): ?>
+		        <option value="<?php echo $docente["docente_id"] ?>" <?php echo ($this->encuesta["docente_id"] == $docente["docente_id"] ? 'selected="selected"' : null); ?>><?php echo $docente["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+
+		<label for="password">CONTRASEÑA</label>
+		<input type="text" name="password" id="password" tabindex="5" value="<?php echo $this->enc->password ?>" /><br />
+
+		<label for="fecha_inicio">HABILITAR EL</label>
+		<input type="text" name="fecha_inicio" id="fecha_inicio" tabindex="6" value="<?php echo $this->enc->fecha_inicio ?>" /><br />
+
+		<label for="fecha_fin">CERRAR EL</label>
+		<input type="text" name="fecha_fin" id="fecha_fin" tabindex="6" value="<?php echo $this->enc->fecha_fin ?>" /><br />
+
+		<label for="max_resp">MÁX RESPUESTAS</label>
+		<input type="text" name="max_resp" id="max_resp" tabindex="8" value="<?php echo $this->enc->max_resp ?>" required="required" /><br />
+
+		<div class="center">
+			<input type="submit" name="crear" id="crear" value="GUARDAR" tabindex="9" />
+			<a href="<?php echo $this->baseUrl('/enc/encuesta/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		</div>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
+<script>
+    /*console.log(<?php echo print_r($this->encuesta); ?>);*/
+
+	$(function() {
+		$('#fecha_inicio, #fecha_fin').datepicker({
+			showOn: "both",
+			beforeShow: customRange,
+			dateFormat: "yy-m-dd 00:00:00"
+		});
+	});
+
+	function customRange(input){
+		if (input.id == 'fecha_fin') {
+			var minDate = new Date($('#fecha_inicio').val());
+			minDate.setDate(minDate.getDate() + 1);
+			return {minDate: minDate};
+		}
+
+		return {}
+	}
+</script>

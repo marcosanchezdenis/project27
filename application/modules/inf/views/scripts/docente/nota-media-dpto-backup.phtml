@@ -1,0 +1,175 @@
+<h2>
+	IV. Nota media del Departamento
+</h2>
+
+<p style="margin-top: -20px; font-style: italic; color: #223359;">
+	<span class="resaltado"><?php echo $this->data['departamento']; ?></span>
+</p>
+<br>
+
+<p>
+	El objetivo de explicitar la nota media del departamento es que cada docente que lee
+	su informe individual pueda tener idea de c&oacute;mo se posiciona con relaci&oacute;n
+	a &eacute;sta.
+</p>
+
+<br>
+<h5>Puntajes obtenidos por categorias</h5>
+<table>
+	<tr>
+		<th style="text-align: center; width: 70%;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+		<th style="text-align: center;">PROMEDIO</th>
+		<th style="text-align: center;">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuestaDepartamento['Categorias'] as $categoria): ?>
+	<tr>
+		<td><?php echo $categoria['categoria']; ?></td>
+		<td style="text-align: center;"><?php echo $categoria['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $categoria['nota']; ?></td>
+	</tr>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<tr>
+		<td><?php echo $subCategoria['categoria']; ?></td>
+		<td style="text-align: center;"><?php echo $subCategoria['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $subCategoria['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+
+	<?php endforeach; ?>
+</table>
+
+<?php
+    $max = 0; $min = 5;
+    foreach ($this->encuestaDepartamento['Categorias'] as $categoria) {
+foreach ($categoria['Preguntas'] as $pregunta) {
+if ($max < $pregunta['promedio']) {
+$max = $pregunta['promedio'];
+$notaMax = $pregunta['nota'];
+}
+
+if ($min > $pregunta['promedio']) {
+$min = $pregunta['promedio'];
+$notaMin = $pregunta['nota'];
+}
+}
+
+foreach ($categoria['Categorias'] as $subCategoria) {
+foreach ($subCategoria['Preguntas'] as $pregunta) {
+if ($max < $pregunta['promedio']) {
+$max = $pregunta['promedio'];
+$notaMax = $pregunta['nota'];
+}
+
+if ($min > $pregunta['promedio']) {
+$min = $pregunta['promedio'];
+$notaMin = $pregunta['nota'];
+}
+}
+}
+}
+?>
+
+<h5>&Iacute;tems del puntaje m&aacute;s alto.</h5>
+
+<table>
+	<tr>
+		<th style="text-align: center; width: 70%;">&Iacute;TEMS</th>
+		<th style="text-align: center;">PROMEDIO</th>
+		<th style="text-align: center;">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuestaDepartamento['Categorias'] as $categoria): ?>
+	<?php foreach ($categoria['Preguntas'] as $pregunta): ?>
+	<?php if ($pregunta['nota'] == $notaMax): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endif; ?>
+	<?php endforeach; ?>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<?php foreach ($subCategoria['Preguntas'] as $pregunta): ?>
+	<?php if ($pregunta['nota'] == $notaMax): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+</table>
+
+<h5>&Iacute;tems del puntaje m&aacute;s bajo.</h5>
+
+<table>
+	<tr>
+		<th style="text-align: center; width: 70%;">&Iacute;TEMS</th>
+		<th style="text-align: center;">PROMEDIO</th>
+		<th style="text-align: center;">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuestaDepartamento['Categorias'] as $categoria): ?>
+	<?php foreach ($categoria['Preguntas'] as $pregunta): ?>
+	<?php if ($pregunta['nota'] == $notaMin): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endif; ?>
+	<?php endforeach; ?>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<?php foreach ($subCategoria['Preguntas'] as $pregunta): ?>
+	<?php if ($pregunta['nota'] == $notaMin): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endif; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+</table>
+
+<h5>Resultado de la Encuesta</h5>
+<table>
+	<tr>
+		<th style="text-align: center; width: 70%;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+		<th style="text-align: center;">PROMEDIO</th>
+		<th style="text-align: center;">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuestaDepartamento['Categorias'] as $categoria): ?>
+	<tr>
+		<td style="font-weight: bold;"><?php echo $categoria['categoria']; ?></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<?php foreach ($categoria['Preguntas'] as $pregunta): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<tr>
+		<td style="font-style: italic; font-weight: bold;"><?php echo $subCategoria['categoria']; ?></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<?php foreach ($subCategoria['Preguntas'] as $pregunta): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+</table>

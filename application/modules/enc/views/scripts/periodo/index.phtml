@@ -1,0 +1,81 @@
+<?php $this->headTitle()->prepend('Periodos'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/index.css')); ?>
+
+<a class="standard-button" href="crear" title="Crea un nuevo periodo lectivo">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR PERIODO
+</a>
+
+<br />
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->periodos)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin Periodos Lectivos.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="40%">PERIODO LECTIVO</th>
+                <th width="40%">A&Ntilde;O ACADEMICO</th>
+                <th width="10%">HABILITADO</th>
+                <th width="10%">VISIBLE A PROFESORES</th>
+                <th width="10%">ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->periodos as $periodo): ?>
+            <tr>
+                <td style="text-align: center;"><?php echo $periodo["periodo"]; ?></td>
+                <td style="text-align: center;"><?php echo $periodo["anho"]; ?></td>
+                <td style="text-align: center;">
+                    <a href="activar?id=<?php echo $periodo["periodo_lectivo_id"]; ?>">
+                    <?php if ($periodo["activo"] == 'S'): ?>
+                        <img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Clic para deshabilitar" />
+                    <?php else: ?>
+                        <img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Clic para habilitar" />
+                    <?php endif; ?>
+                    </a>
+                </td>
+				<td style="text-align: center;">
+					<a href="visible-prof?id=<?php echo $periodo["periodo_lectivo_id"]; ?>">
+						<?php if ($periodo["visible_profesores"] == 'S'): ?>
+							<img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Clic para deshabilitar" />
+						<?php else: ?>
+							<img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Clic para habilitar" />
+						<?php endif; ?>
+					</a>
+                </td>
+                <td style="text-align: center">
+                <?php if ($periodo["activo"] == 'S'): ?>
+                    <a title="Solo se pueden eliminar periodos no activos">
+            	<?php else: ?>
+                	<a href="borrar?id=<?php echo $periodo["periodo_lectivo_id"]; ?>" title="Clic para borrar">
+                    <?php endif; ?>
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crea un nuevo periodo lectivo">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR PERIODO
+</a>
+<br /><br /><br />
+
+<?php if (count($this->errors)): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $error): ?>
+    	<li><?php echo $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

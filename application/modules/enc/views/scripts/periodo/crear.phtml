@@ -1,0 +1,41 @@
+<?php $this->headTitle()->prepend('Crear Periodo Lectivo'); ?>
+<?php $this->headlink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/datos-principales.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/enc/escala/crear.js')); ?>
+
+<form id="crear-periodo" action="crear" method="post">
+	<fieldset>
+		<legend>DATOS DEL PERIODO LECTIVO</legend>
+		
+		<input type="hidden" name="periodo_lectivo_id" id="periodo_lectivo_id" value="<?php echo $this->periodo["periodo_lectivo_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="N" />
+		
+		<label for="periodo_id">PERIODO<span class="required-field"> * </span></label>
+		<select id="periodo_id" name="periodo_id" tabindex="1">
+		    <option <?php echo ($this->periodo['periodo_id'] == "none" ? 'selected="selected"' : null); ?> value="none">-- Seleccione un periodo --</option>
+		    <?php foreach ($this->periodos as $periodo): ?>
+		        <option value="<?php echo $periodo["periodo_id"]; ?>" <?php echo ($this->periodo["periodo_id"] == $periodo["periodo_id"] ? 'selected="selected"' : null); ?>><?php echo $periodo["periodo"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<label for="anho_lectivo">A&Ntilde;O LECTIVO<span class="required-field"> * </span></label>
+		<input type="text" name="anho_lectivo" id="anho_lectivo" tabindex="2" value="<?php echo $this->periodo["anho_lectivo"]; ?>" />
+		<span id="nombreInfo"></span><br />
+	</fieldset>
+		
+	<div class="center">
+    	<input type="submit" name="crear" id="crear" value="CREAR" tabindex="4" />
+    	<a href="<?php echo $this->baseUrl('/enc/periodo/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+	</div>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

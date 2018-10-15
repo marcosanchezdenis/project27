@@ -1,0 +1,55 @@
+<h2>
+    V. <?php echo $this->data["docente"]; ?> (<?php echo $this->data["asignatura"]; ?>)
+</h2>
+
+<p style="margin-top: -20px; font-style: italic; color: #223359;">
+    <span class="resaltado">N&uacute;mero de respuestas recibidas: 
+    <?php echo $this->data["cnt_respuestas"]; ?> (Equivale al 
+    <?php echo $this->porcentaje; ?>% del Universo)</span><br/>
+	<span class="resaltado">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo "Fecha de Generación: " . $this->results[0]["fecha"] ?></span>
+</p>
+
+<br/>
+* Poseen respuestas con NO APLICA (que no se promedian).
+<br/><br/>
+
+<table>
+        <tr>
+                <th style="text-align: center; width: 70%;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+                <th style="text-align: center;">PROMEDIO</th>
+                <th style="text-align: center;">NOTA</th>
+        </tr>
+        <?php foreach($this->results as $res): ?>
+                <?php if ($res["part"] == 1): ?>
+                        
+                        <tr>
+                                <td><?php echo $res['texto']; ?></td>
+                                <td style="text-align: center;"><?php echo $res['promedio']; ?></td>
+                                <td style="text-align: center;"><?php echo $res['nota']; ?></td>
+                        </tr>
+                            
+                <?php endif; ?>
+        <?php endforeach; ?>
+</table>
+
+<br/>
+<table>
+	<tr>
+		<th style="text-align: center; width: 70%;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+		<th style="text-align: center;">PROMEDIO</th>
+		<th style="text-align: center;">NOTA</th>
+	</tr>
+	<?php foreach($this->results as $res): ?>
+		<?php if ($res["part"] == 2): ?>
+			<tr>
+				<td
+					<?php if($res["bold"]): ?>
+						style="font-weight: bold;"
+					<?php endif; ?>
+					><?php echo $res['texto']; ?></td>
+				<td style="text-align: center;"><?php echo $res['promedio']; ?></td>
+				<td style="text-align: center;"><?php echo $res['nota']; ?></td>
+			</tr>
+		<?php endif; ?>
+	<?php endforeach; ?>
+</table>

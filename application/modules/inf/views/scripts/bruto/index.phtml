@@ -1,0 +1,20 @@
+<?php $this->headTitle()->prepend('Informes'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/index.css')); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+
+<br/>
+
+<form action="informe" method="get">
+	<fieldset>
+		<label for="periodo_lectivo_id">PERIODO LECTIVO</label>
+		<select id="periodo_lectivo_id" name="periodo_lectivo_id" tabindex="3">
+			<?php foreach ($this->periodos as $periodo): ?>
+				<option value="<?php echo $periodo["periodo_lectivo_id"]; ?>"><?php echo $periodo["periodo"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+
+		<div class="center">
+			<input type="submit" name="generar" id="generar" value="Descargar Datos en Bruto (XLS)" tabindex="3" style="width: 300px;" />
+		</div>
+	</fieldset>
+</form>

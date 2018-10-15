@@ -1,0 +1,75 @@
+<h2>
+	<?php echo $this->data["docente"]; ?> (<?php echo $this->data["asignatura"]; ?>)
+</h2>
+
+<p style="margin-top: -20px; font-style: italic; color: #223359;">
+N&uacute;mero de respuestas recibidas:
+	<?php echo $this->data["cnt_respuestas"]; ?> (Equivale al
+	<?php echo $this->porcentaje; ?>% del Universo)
+</p>
+
+<br>
+<h3>Puntajes obtenidos por categorias</h3>
+<table border="1" width="632">
+	<tr>
+		<th style="text-align: center; width: 442px;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+		<th style="text-align: center; width: 90px">PROMEDIO</th>
+		<th style="text-align: center; width: 100px">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuesta['Categorias'] as $categoria): ?>
+	<tr>
+		<td><?php echo $categoria['categoria']; ?></td>
+		<td style="text-align: center;"><?php echo $categoria['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $categoria['nota']; ?></td>
+	</tr>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<tr>
+		<td><?php echo $subCategoria['categoria']; ?></td>
+		<td style="text-align: center;"><?php echo $subCategoria['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $subCategoria['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+
+	<?php endforeach; ?>
+</table>
+
+<br>
+<h3>Resultado de la Encuesta</h3>
+
+<table border="1" width="632">
+	<tr>
+		<th style="text-align: center; width: 442px;">GRANDES CATEGORIAS (puntuaci&oacute;n del 1 al 4)</th>
+		<th style="text-align: center; width: 90px">PROMEDIO</th>
+		<th style="text-align: center; width: 100px">NOTA</th>
+	</tr>
+	<?php foreach ($this->encuesta['Categorias'] as $categoria): ?>
+	<tr>
+		<td style="font-weight: bold;"><?php echo $categoria['categoria']; ?></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<?php foreach ($categoria['Preguntas'] as $pregunta): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+
+	<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+	<tr>
+		<td style="font-style: italic; font-weight: bold;"><?php echo $subCategoria['categoria']; ?></td>
+		<td></td>
+		<td></td>
+	</tr>
+	<?php foreach ($subCategoria['Preguntas'] as $pregunta): ?>
+	<tr>
+		<td><?php echo $pregunta['pregunta']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['promedio']; ?></td>
+		<td style="text-align: center;"><?php echo $pregunta['nota']; ?></td>
+	</tr>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+	<?php endforeach; ?>
+</table>

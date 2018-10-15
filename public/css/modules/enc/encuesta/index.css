@@ -1,0 +1,46 @@
+label[for="nombre"] {
+	color: #223359;
+}
+
+input {
+	padding: 0px;
+	margin: 0px;
+}
+
+input[type="text"] {
+	margin-left: 10px;
+	height: auto;
+	width: 200px;
+	padding: 5px;
+	color: #223359
+}
+
+input[type="submit"] {
+	margin-left: 10px;
+	height: 30px;
+	color: #223359;
+	border: 0px;
+	font-weight: bold;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+a.get-link {
+	font-weight: bold;
+	color: #223359;
+	text-decoration: none; 
+}
+
+a.get-link:hover {
+	color: #58ACFA;
+}
+
+form.search-form {
+	display: none;
+}
+
+a img {
+	margin-top: 3px;
+	margin-left: 5px;
+}

@@ -1,0 +1,67 @@
+<?php $this->headTitle()->prepend('Editar Docente'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/adm/docente/editar.js')); ?>
+
+<form id="editar-docente" action="editar" method="post">
+	<fieldset>
+		<legend>DATOS DEL DOCENTE</legend>
+		
+		<input type="hidden" name="docente_id" id="docente_id" value="<?php echo $this->docente["docente_id"]; ?>" />
+		<input type="hidden" name="persona_id" id="persona_id" value="<?php echo $this->docente["persona_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="<?php echo $this->docente["activo"]; ?>" />
+		<input type="hidden" name="codigo" id="codigo" value="<?php echo $this->docente["codigo"]; ?>" />
+		
+		<label for="nombre">NOMBRE<span class="required-field"> * </span>: </label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->docente["nombre"]; ?>" required="required" />
+		<span id="nombreInfo"></span><br />
+		
+		<label for="nombre">APELLIDO<span class="required-field"> * </span>: </label>
+		<input type="text" name="apellido" id="apellido" tabindex="2" value="<?php echo $this->docente["apellido"]; ?>" required="required" />
+		<span id="apellidoInfo"></span><br />
+		
+		<label for="nombre">EMAIL: </label>
+		<input type="text" name="email" id="email" tabindex="3" value="<?php echo $this->docente["email"]; ?>" />
+		<span id="emailInfo"></span><br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>ASIGNACI&Oacute;N DE DEPARTAMENTOS</legend>
+		
+		<div id="nuevos-dptos">
+		    <?php foreach ($this->docente['departamentos'] as $docenteDpto): ?>
+		        <div class="docente_dpto">
+		            <label for="docente_dpto_id">DEPARTAMENTO <span class="required-field"> * </span></label>
+	                <select id="docente_dpto_id" name="departamentos[]" tabindex="7">
+	                    <?php foreach ($this->departamentos as $departamento): ?>
+            				<option value="<?php echo $departamento["departamento_id"]; ?>" <?php echo ($docenteDpto["departamento_id"] == $departamento["departamento_id"] ? 'selected="selected"' : null); ?>><?php echo $departamento["nombre"]; ?></option>
+            			<?php endforeach; ?>
+	                </select>
+                </div>
+		    <?php endforeach; ?>
+		</div>
+		<div id="buttons">
+    		<a name="agregar-dpto" id="agregar-dpto">AGREGAR DEPARTAMENTO</a>
+    		|
+    		<a name="borrar-dpto" id="borrar-dpto">ELIMINAR DEPARTAMENTO</a>
+    		|
+    		<a name="borrar-todo" id="borrar-todo">ELIMINAR TODOS</a>
+		</div>
+	</fieldset>
+	
+	<div class="center">
+		<input type="submit" name="crear" id="crear" value="GUARDAR" tabindex="4" />
+		<a href="<?php echo $this->baseUrl('/adm/docente/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+	</div>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

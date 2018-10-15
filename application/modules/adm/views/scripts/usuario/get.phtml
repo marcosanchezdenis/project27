@@ -1,0 +1,74 @@
+<?php $this->headTitle()->prepend($this->mainTitle); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/get.css')); ?>
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->usuario["activo"] == "N"):?>
+     | 
+    <a href="<?php echo $this->baseUrl('/adm/usuario/editar?id=' . $this->usuario['usuario_id']); ?>">Editar Usuario</a>
+    <?php endif; ?>
+</div>
+
+<hr class="separator" />
+
+<?php if ($this->usuario): ?>
+
+    <table class="visualizaciones">
+        <tr>
+            <th width="20%">USUARIO</th>
+            <th width="25%">NOMBRE</th>
+            <th width="25%">APELLIDO</th>
+            <th width="20%">CONTACTO</th>
+            <th width="10%">ACTIVO</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><?php echo $this->usuario["usuario"]; ?></td>
+            <td><?php echo $this->usuario["nombre"]; ?></td>
+            <td><?php echo $this->usuario["apellido"]; ?></td>
+            <?php if ($this->usuario["email"] != ""): ?>
+                <td>
+                    <?php echo $this->usuario["email"]; ?>
+                </td>
+            <?php else: ?>
+                <td style="text-align: center;">
+                    <?php echo "No tiene"; ?>
+                </td>
+            <?php endif; ?>
+            <td style="text-align: center;">
+                <?php if ($this->usuario["activo"] == "S"): ?>
+                    <?php echo "S&iacute;"; ?>
+                <?php else: ?>
+                    <?php echo "No"; ?>
+                <?php endif; ?>
+            </td>
+        </tr>
+    </table>
+
+    <?php if (count($this->usuario['roles'])): ?>
+    <dl>
+        <dt>Roles Asignados</dt>
+        <?php foreach ($this->usuario['roles'] as $rol): ?>
+            <li><dd><?php echo $rol['rol']; ?></dd></li>
+        <?php endforeach; ?>
+        <?php if ($this->usuario['es_docente'] == "S"): ?>
+            <li><dd>Docente</dd></li>
+        <?php endif; ?>
+    </dl>
+    <?php elseif ($this->usuario['es_docente'] == "S"): ?>
+    <dl>
+        <dt>Roles Asignados</dt>
+        <li><dd>Docente</dd></li>
+    </dl>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<hr class="separator" />
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->usuario["activo"] == "N"):?>
+     | 
+    <a href="<?php echo $this->baseUrl('/adm/usuario/editar?id=' . $this->usuario['usuario_id']); ?>">Editar Usuario</a>
+    <?php endif; ?>
+</div>

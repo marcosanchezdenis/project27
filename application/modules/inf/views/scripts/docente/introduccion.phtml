@@ -1,0 +1,57 @@
+<h2>
+	I. Introduccion
+</h2>
+
+<p>
+	El objetivo del presente documento es describir el perfil individual de los docentes y sus materias 
+	y como tal es parte del informe de los resultados del procesamiento de datos obtenidos mediante la 
+	aplicaci&oacute;n del instrumento <span class="resaltado">&quot;<?php echo $this->data['plantilla']; ?>&quot;</span> 
+	llevado a cabo en el <span class="resaltado"><?php echo $this->data['departamento']; ?></span> de la 
+	Universidad Cat&oacute;lica &quot;Nuestra Se&ntilde;ora de la Asunci&oacute;n&quot; en el 
+	<span class="resaltado"><?php echo $this->data['periodo']; ?></span>.
+</p>
+
+<p>	
+	Con el intrumento se revel&oacute; la opini&oacute;n que los estudiantes tienen de los docentes, lo 
+	cual refleja s&oacute;lo en parte el nivel del desempe&ntilde;o de los mismos y no puede ser tomado 
+	como determinante exclusivo de la calidad docente, a&uacute;n cuando no deja de ser un indicador 
+	importante.
+</p>
+
+<p>
+	Las grandes dimensiones en torno a las cuales se articulan las preguntas del formulario son:
+</p>
+
+<?php if (count($this->encuesta['Categorias']) > 0): ?>
+<ol class="num-alpha">
+<?php foreach ($this->encuesta['Categorias'] as $categoria): ?>
+	<li><?php echo $categoria['categoria']; ?>
+	<?php if (count($categoria['Categorias']) > 0): ?>
+		<ol>
+		<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+			<li><?php echo $subCategoria['categoria']; ?></li>
+		<?php endforeach; ?>
+		</ol>
+	<?php endif; ?>
+	</li>
+<?php endforeach; ?>
+</ol>
+<?php endif; ?>
+
+<p>
+	Cada una de estas dimensiones y sub-dimensiones contiene &iacute;tems que m&aacute;s adelante 
+	ser&aacute;n expuestos.
+</p>
+
+<p>
+	Tambi&eacute;n se ha pedido a los estudiantes calificar el desempe&ntilde;o docente y apuntar las 
+	limitaciones que presenta el ejercicio de la docencia. <br>
+</p>
+
+<p>
+	El documento est&aacute; dividido en dos grandes secciones que siguen a esta introducci&oacute;n. La 
+	primera expone un glosario de t&eacute;rminos y conceptos que permita a cada docente que lee su 
+	informe individual una mejor comprensi&oacute;n del significado que quiere d&aacute;rsele a aquellos 
+	aspectos de su praxis que fueron evaluados. La segunda secci&oacute;n describe el perfil de los 
+	docentes y sus materias.
+</p>

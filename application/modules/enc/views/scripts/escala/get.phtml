@@ -1,0 +1,58 @@
+<?php $this->headTitle()->prepend('Escala'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/get.css')); ?>
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/enc/escala/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->results['usado'] == "N"): ?>
+     | 
+    <a href="<?php echo $this->baseUrl('/enc/escala/editar?id=' . $this->results['escala_id']); ?>">Editar Escala</a>
+     | 
+    <a href="<?php echo $this->baseUrl('/enc/escala/borrar?id=' . $this->results['escala_id']); ?>">Borrar Escala</a>
+    <?php endif; ?>
+</div>
+
+<hr class="separator" />
+
+<?php if ($this->results): ?>
+
+    <table class="visualizaciones">
+        <tr>
+            <th width="30%">ESCALA</th>
+            <th width="70%">DESCRIPCION</th>
+        </tr>
+        <tr>
+            <td><?php echo $this->results["nombre"]; ?></td>
+            <?php if ($this->results["descripcion"] != ""): ?>
+                <td>
+                    <?php echo $this->results["descripcion"]; ?>
+                </td>
+            <?php else: ?>
+                <td style="text-align: center;">
+                    <?php echo "No tiene"; ?>
+                </td>
+            <?php endif; ?>
+        </tr>
+    </table>
+    
+    <?php if (count($this->results['EscalaValor'])): ?>
+    <dl>
+        <dt>Valores de la Escala</dt>
+        <?php foreach ($this->results['EscalaValor'] as $valor): ?>
+            <li><dd><?php echo $valor['valor'] . ' (' . $valor['descripcion'] . ')'; ?></dd></li>
+        <?php endforeach; ?>
+    </dl>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<hr class="separator" />
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/enc/escala/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->results['usado'] == "N"): ?>
+     | 
+    <a href="<?php echo $this->baseUrl('/enc/escala/editar?id=' . $this->results['escala_id']); ?>">Editar Escala</a>
+     | 
+    <a href="<?php echo $this->baseUrl('/enc/escala/borrar?id=' . $this->results['escala_id']); ?>">Borrar Escala</a>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,61 @@
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/inf/informe.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/inf/informe.js')); ?>
+
+<div id="indice" class="fixed">
+	<div class="links">
+	    <a href="<?php echo $this->baseUrl('/inf/docente/get?id=' . $this->data['docente_id']); ?>">&#x21a9; VOLVER</a>
+		<br/>
+	    <a href="<?php echo $this->baseUrl('/inf/docente/inf-pdf?id=' . $this->idencuesta); ?>">VERSION PDF</a>
+		<br/>
+	    <a href="<?php echo $this->baseUrl('/inf/docente/inf-xls?id=' . $this->idencuesta); ?>">VERSION EXCEL</a>
+	</div>
+	
+	<div class="propietario">
+		<?php echo $this->data['docente'] . '<br>' . $this->data['asignatura'] . '<br>' . $this->data['periodo']; ?>
+	</div>
+	
+    <h5>INDICE</h5>
+	<ol class="indice">
+		<li class="indice"><a id="indice-introduccion">Introducci&oacute;n</a></li>
+		<li class="indice"><a id="indice-glosario">Glosario de Conceptos</a></li>
+		<li class="indice">
+			<a id="indice-perfil">Perfil de los docentes y materias</a>
+			<ul>
+				<li class="indice"><a id="indice-media-dpto">Nota media del Departamento</a></li>
+				<li class="indice"><a id="indice-nota-docente">Notas del Docente</a></li>
+			</ul>
+		</li>
+	</ol>
+</div>
+
+<div id="informe">
+	<div class="oculto" id="introduccion">
+		<?php echo $this->introduccion; ?>
+		<br />
+		<a class="up">Subir &uarr;</a>
+	</div>
+	
+	<div class="oculto" style="display: none;" id="glosario">
+		<?php echo $this->glosario; ?>
+		<hr />
+		<a class="up">Subir &uarr;</a>
+	</div>
+	
+	<div class="oculto" style="display: none;" id="perfil">
+		<?php echo $this->perfil; ?>
+		<hr />
+		<a class="up">Subir &uarr;</a>
+	</div>
+	
+	<div class="oculto" style="display: none;" id="media-dpto">
+	    <?php echo $this->mediaDpto; ?>
+	    <hr />
+	    <a class="up">Subir &uarr;</a>
+	</div>
+	
+	<div class="oculto" style="display: none;" id="nota-docente">
+	    <?php echo $this->notaDocente; ?>
+	    <hr />
+	    <a class="up">Subir &uarr;</a>
+	</div>
+</div>

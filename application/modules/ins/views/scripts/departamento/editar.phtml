@@ -1,0 +1,40 @@
+<?php $this->headTitle()->prepend('Editar Departamento'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/ins/asignatura/crear.css')); ?>
+
+<form action="editar" method="post">
+	<fieldset>
+		<legend>DATOS DEL DEPARTAMENTO</legend>
+		
+		<input type="hidden" name="departamento_id" id="departamento_id" value="<?php echo $this->departamento["departamento_id"]; ?>" />
+		
+		<label for="nombre">DEPARTAMENTO<span class="required-field"> * </span>: </label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->departamento["nombre"]; ?>" required="required" /><br />
+		
+		<label for="codigo">CODIGO<span class="required-field"> * </span>: </label>
+		<input type="text" name="codigo" id="codigo" tabindex="2" value="<?php echo $this->departamento["codigo"]; ?>" required="required" /><br />
+		
+		<label for="facultad_id">FACULTAD<span class="required-field"> * </span></label>
+		<select id="facultad_id" name="facultad_id" tabindex="3">
+		    <?php foreach ($this->facultades as $facultad): ?>
+		        <option value="<?php echo $facultad["facultad_id"] ?>" <?php echo ($this->departamento["facultad_id"] == $facultad["facultad_id"] ? 'selected="selected"' : null); ?>><?php echo $facultad["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<div class="center">
+    		<input type="submit" name="crear" id="crear" value="GUARDAR" tabindex="2" />
+    		<a href="<?php echo $this->baseUrl('/ins/departamento/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		</div>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

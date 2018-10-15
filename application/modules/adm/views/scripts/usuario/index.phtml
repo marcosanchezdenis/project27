@@ -1,0 +1,97 @@
+<?php $this->headTitle()->prepend($this->mainTitle); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/index.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/adm/usuario/index.js')); ?>
+
+<a class="standard-button" href="crear" title="Crea un nuevo usuario">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR USUARIO
+</a>
+
+<br />
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->usuarios)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin usuarios.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="18%" title="Nombre de usuario para acceder al sistema">USUARIO</th>
+                <th width="20%">NOMBRE</th>
+                <th width="20%">APELLIDO</th>
+                <th width="18%">CONTACTO</th>
+                <th width="8%" title="Solo los usuarios activos pueden ingresar al sistema">ACTIVO</th>
+                <th width="8%">EDITAR</th>
+                <th width="8%">ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->usuarios as $usuario): ?>
+            <tr>
+                <td style="text-align: center;"><a class="get-link" href="get?id=<?php echo $usuario["usuario_id"] ?>"><?php echo $usuario["usuario"]; ?></a></td>
+                <td><?php echo $usuario["Persona"]["nombre"]; ?></td>
+                <td><?php echo $usuario["Persona"]["apellido"]; ?></td>
+                <?php if ($usuario["Persona"]["email"] != ""): ?>
+                    <td>
+                        <?php echo $usuario["Persona"]["email"]; ?>
+                    </td>
+                <?php else: ?>
+                    <td style="text-align: center;">
+                        <?php echo " -- "; ?>
+                    </td>
+                <?php endif; ?>
+                <td style="text-align: center;">
+                    <a href="activar?id=<?php echo $usuario["usuario_id"]; ?>">
+                        <?php if ($usuario["activo"] == 'S'): ?>
+                            <img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Usuario Activo - Clic para desactivar" />
+                        <?php else: ?>
+                            <img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Usuario Inactivo - Clic para activar" />
+                        <?php endif; ?>
+                    </a>
+                </td>
+                <td style="text-align: center;">
+                    <?php if ($usuario["activo"] == 'N'): ?>
+                	<a href="editar?id=<?php echo $usuario["usuario_id"]; ?>">
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+					</a>
+                	<?php else: ?>
+                	<a title="No se pueden editar usuarios activos">
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+            	    </a>
+                	<?php endif; ?>
+				</td>
+                <td style="text-align: center;">
+                    <?php if ($usuario["activo"] == 'N'): ?>
+                	<a class="delete-button" href="borrar?id=<?php echo $usuario["usuario_id"]; ?>">
+                		<img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                	<?php else: ?>
+                	<a title="No se pueden borrar usuarios activos">
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+            	    </a>
+            	    <?php endif; ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crea un nuevo usuario">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR USUARIO
+</a>
+
+<?php if (count($this->errors)): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $error): ?>
+    	<li><?php echo $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

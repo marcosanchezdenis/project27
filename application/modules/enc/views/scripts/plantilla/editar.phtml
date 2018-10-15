@@ -1,0 +1,41 @@
+<?php $this->headTitle()->prepend('Editar Datos Principales'); ?>
+<?php $this->headlink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/datos-principales.css')); ?>
+
+<form action="editar" method="post">
+	<fieldset>
+		<legend>DATOS PRINCIPALES</legend>
+		
+		<input type="hidden" name="encuesta_id" id="encuesta_id" value="<?php echo $this->results["encuesta_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="<?php echo $this->results["activo"]; ?>" />
+		
+		<label for="nombre">NOMBRE<span class="required-field"> * </span>: </label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" required="required" value="<?php echo $this->results["encuesta"]; ?>" /><br />
+		
+		<label for="descripcion">DESCRIPCION: </label>
+		<textarea name="descripcion" rows="3" cols="50" tabindex="2"><?php echo $this->results["descripcion"]; ?></textarea><br />
+		
+		<label for="escala_id">ESCALA<span class="required-field"> * </span>: </label>
+		<select id="escala_id" name="escala_id" tabindex="3">
+		    <option value="none">-- Seleccione una escala --</option>
+			<?php foreach ($this->escalas as $escala): ?>
+				<option value="<?php echo $escala["escala_id"]; ?>" <?php echo ($this->results["escala_id"] == $escala["escala_id"] ? 'selected="selected"' : null); ?>><?php echo $escala["nombre"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+		
+		<input type="submit" name="crear" id="crear" value="GUARDAR" tabindex="4" />
+		<a href="<?php echo $this->baseUrl('/enc/plantilla/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		<a class="link-interior" href="<?php echo $this->baseUrl('enc/plantilla/estructura?id=' . $this->results["encuesta_id"]); ?>">MODIFICAR ESTRUCTURA &raquo;</a>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

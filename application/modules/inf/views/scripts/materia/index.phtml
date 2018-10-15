@@ -1,0 +1,32 @@
+<?php $this->headTitle()->prepend('Materias'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/index.css')); ?>
+
+<div style="margin: 15px auto;">
+	<?php if (!count($this->asignaturas)): ?>
+		<div class="warning">
+			<img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+			<br /><h4>Sin materias.</h4>
+		</div>
+	<?php else: ?>
+		<table>
+			<thead>
+			<tr>
+				<th width="10%">CODIGO</th>
+				<th width="35%"">CARRERA</th>
+				<th width="55%">MATERIA</th>
+			</tr>
+			</thead>
+			<tbody>
+			<?php foreach ($this->asignaturas as $asignatura): ?>
+				<tr>
+					<td style="text-align: center;"><?php echo $asignatura["codigo"]; ?></td>
+					<td><?php echo $asignatura["carrera"]; ?></td>
+					<td><a href="/inf/materia/set-periodo?materia=<?php echo $asignatura["asignatura_id"]; ?>">
+							<?php echo $asignatura["nombre"]; ?>
+					</a></td>
+				</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	<?php endif; ?>
+</div>

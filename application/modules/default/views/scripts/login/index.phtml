@@ -1,0 +1,22 @@
+<?php $this->headTitle()->prepend('Ingresar'); ?>
+<?php $this->headlink()->appendStylesheet($this->baseUrl('css/modules/default/login.css')); ?>
+
+<form action="index" method="post">
+    <fieldset>
+        <legend>INICIAR SESION</legend>
+        
+        <label for="usuario">USUARIO:</label>
+        <input type="text" name="usuario" id="usuario" tabindex="1" required="required" /><br />
+        
+        <label for="contrasena">CONTRASE&Ntilde;A:</label>
+        <input type="password" name="contrasena" id="contrasena" tabindex="2" required="required" /><br />
+        
+        <input type="submit" name="submit" id="submit" value="INICIAR SESION" tabindex="3" />
+    </fieldset>
+</form>
+
+<?php if ($this->error): ?>
+<div class="error">
+    <?php echo $this->error; ?>
+</div>
+<?php endif; ?>

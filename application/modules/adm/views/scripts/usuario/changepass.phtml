@@ -1,0 +1,49 @@
+<?php $this->headTitle()->prepend('Nuevo Usuario'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+
+<?php if ($this->errors): ?>
+	<div class="error">
+		<ul>
+			<?php foreach ($this->errors as $error): ?>
+					<li><?php echo $error; ?></li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+<?php endif; ?>
+
+	<form id="changepass" action="/adm/usuario/changepass" method="post">
+		<div class="half-screen">
+			<fieldset>
+				<legend>CAMBIAR CONTRASE&Ntilde;A</legend>
+
+				<label for="usuario">USUARIO<span class="required-field"> * </span></label>
+				<input type="text" name="usuario" id="usuario" tabindex="" value="<?php echo $this->usuario["usuario"]; ?>" disabled />
+				<span id="usuarioInfo"></span><br />
+
+				<label for="passviejo">CONTRASE&Ntilde;A VIEJA<span class="required-field"> * </span></label>
+				<input type="password" name="passviejo" id="passviejo" tabindex="1" value="" />
+				<span id="contrasenaInfo"></span><br />
+
+				<label for="contrasena">CONTRASE&Ntilde;A NUEVA<span class="required-field"> * </span></label>
+				<input type="password" name="contrasena" id="contrasena" tabindex="2" value="" />
+				<span id="contrasenaInfo"></span><br />
+
+				<label for="confirmacion">CONFIRMAR NUEVA</label>
+				<input type="password" name="confirmacion" id="confirmacion" tabindex="3" value="" />
+
+
+				<a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>">
+					<button type="button" tabindex="4" style="width: 170px;">VOLVER</button>
+				</a>
+
+				<input type="submit" value="CAMBIAR" tabindex="5"  style="width: 170px;"/>
+			</fieldset>
+		</div>
+	</form>
+
+<script type="text/javascript">
+	jQuery(function($){
+		$("#passviejo").focus();
+	});
+</script>
+

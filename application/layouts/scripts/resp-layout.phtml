@@ -1,0 +1,76 @@
+<?php echo $this->doctype(); ?>
+<html>
+
+<head>
+    <?php echo $this->headTitle(); ?>
+    
+    <!-- CSS -->
+    <?php echo $this->headLink(); ?>
+    <!-- End CSS -->
+    
+    <!-- JS -->
+    <?php echo $this->headScript(); ?>
+    <!-- End JS -->
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+
+</head>
+
+<body>
+    
+    <div id="main-container">
+    
+        <!-- HEADER -->
+        <div class="scrollbanner"> <!-- id="header">-->
+            <div id="header-container" > <!--class="container">-->
+                <div id="main-logo">
+                    <a href="<?php echo $this->baseUrl(); ?>/index/index">
+                        <img alt="UC" width="120px" height="120px" src="<?php echo $this->baseUrl('images/logo-uca.png'); ?>" />
+                    </a>
+                </div>
+                
+                <div id="main-banner">
+                    <a href="<?php echo $this->baseUrl(); ?>/index/index">
+                        <img alt="Encuestas Web" src="<?php echo $this->baseUrl('images/main-banner.jpg'); ?>" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="menu">
+            <div id="menu-container" class="container">
+                <ul class="menu-bar">
+                    <li>
+                        <a>COMPLETAR ENCUESTA</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- CONTENT -->
+        <div id="content">
+            <div id="content-container" class="container" style="width: auto;">
+                <?php echo $this->layout()->content; ?>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div id="footer">
+            <div id="footer-container" class="container">
+                Universidad Cat&oacute;lica &quot;Nuestra Se&ntilde;ora de la Asunci&oacute;n&quot;
+                <br />
+                Facultad de Ciencias y Tecnolog&iacute;a - DEI
+                <br />
+                Desarrollado por Guido Arce &amp; Diosnel Vel&aacute;zquez
+                <br />
+                &copy; 2013
+            </div>
+        </div>
+    
+    </div>
+    
+</body>
+
+</html>

@@ -1,0 +1,166 @@
+<?php echo $this->doctype(); ?>
+<html>
+
+<head>
+    <?php echo $this->headTitle(); ?>
+    
+    <!-- CSS -->
+    <?php echo $this->headLink(); ?>
+    <!-- End CSS -->
+    
+    <!-- JS -->
+    <?php echo $this->headScript(); ?>
+    <!-- End JS -->
+</head>
+
+<body>
+    
+    <div id="main-container">
+    
+        <!-- HEADER -->
+        <div id="header">
+            <div id="header-container" class="container">
+                <div id="main-logo">
+                    <a href="<?php echo $this->baseUrl(); ?>/default/index/index">
+                        <img title="P&aacute;gina Principal" alt="UC" width="120px" height="120px" src="<?php echo $this->baseUrl('images/logo-uca.png'); ?>" />
+                    </a>
+                </div>
+                
+                <div id="main-banner">
+                    <a href="<?php echo $this->baseUrl(); ?>/default/index/index">
+                        <img title="P&aacute;gina Principal" alt="Encuestas Web" src="<?php echo $this->baseUrl('images/main-banner.jpg'); ?>" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MENU -->
+        <div id="menu">
+            <div id="menu-container" class="container">
+                <ul class="menu-bar">
+                    <?php if (in_array('adm', $this->permisos())): ?>
+                    <li>
+                        <a title="Administracion">ADMINISTRACION</a>
+                        <ul class="menu-bar">
+                            <?php if (in_array('adm-usu', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>" title="Usuarios">USUARIOS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('adm-doc', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/adm/docente/index'); ?>" title="Docentes">DOCENTES</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                    
+                    <?php if (in_array('ins', $this->permisos())): ?>
+                    <li>
+                        <a title="Institucion">INSTITUCION</a>
+                        <ul class="menu-bar">
+                            <?php if (in_array('ins-dep', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/ins/departamento/index'); ?>" title="Departamentos">DEPARTAMENTOS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('ins-car', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/ins/carrera/index'); ?>" title="Carreras">CARRERAS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('ins-asi', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/ins/asignatura/index'); ?>" title="Asignaturas">ASIGNATURAS</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                    
+                    <?php if (in_array('enc', $this->permisos())): ?>
+                    <li>
+                        <a title="Encuestas">ENCUESTAS</a>
+                        <ul class="menu-bar">
+                            <?php if (in_array('enc-pla', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/enc/plantilla/index'); ?>" title="Plantillas">PLANTILLAS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('enc-esc', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/enc/escala/index'); ?>" title="Escalas">ESCALAS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('enc-enc', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/enc/encuesta/index'); ?>" title="Encuestas">ENCUESTAS</a></li>
+                            <?php endif; ?>
+                            
+                            <?php if (in_array('enc-per', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/enc/periodo/index'); ?>" title="Periodos">PERIODOS</a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                    
+                    <?php if (in_array('inf', $this->permisos())): ?>
+                    <li>
+                        <a title="Informes">INFORMES</a>
+                        <ul class="menu-bar">
+                            <?php if (in_array('inf-dep', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/inf/departamento/index'); ?>" title="Departamento">DEPARTAMENTO</a></li>
+                            <?php endif; ?>
+
+							<?php if (in_array('inf-mat', $this->permisos())): ?>
+								<li><a href="<?php echo $this->baseUrl('/inf/materia/index'); ?>" title="Docente">MATERIA</a></li>
+							<?php endif; ?>
+                            
+                            <?php if (in_array('inf-doc', $this->permisos())): ?>
+                            <li><a href="<?php echo $this->baseUrl('/inf/docente/index'); ?>" title="Docente">DOCENTE</a></li>
+                            <?php endif; ?>
+
+							<?php if (false and in_array('inf-bru', $this->permisos())): ?>
+								<li><a href="<?php echo $this->baseUrl('/inf/bruto/index'); ?>" title="Docente">DATOS EN BRUTO</a></li>
+							<?php endif; ?>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+					<li>
+						<a href="<?php echo $this->baseUrl('/adm/usuario/changepass'); ?>" title="Mi Cuenta">MI CUENTA</a>
+					</li>
+                    
+                    <li>
+                    	<a class="last" href="<?php echo $this->baseUrl('/default/login/logout'); ?>" title="Salir del Sistema">SALIR</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- SUB MENU -->
+        <div id="sub-menu">
+            <div id=sub-menu-container class="container">
+            </div>
+        </div>
+        
+        <!-- CONTENT -->
+        <div id="content">
+            <div id="content-container" class="container">
+            	<div id="breadcrumb">
+            		<p><?php echo $this->breadcrumb() . '  ' . $this->mainTitle; ?></p>
+            	</div>
+            	<div id="search-box">
+            		<a></a>
+            	</div>
+            	<hr class="separator" />
+                <?php echo $this->layout()->content; ?>
+            </div>
+        </div>
+        
+        <!-- FOOTER -->
+        <div id="footer">
+            <div id="footer-container" class="container">
+                Universidad Cat&oacute;lica &quot;Nuestra Se&ntilde;ora de la Asunci&oacute;n&quot;
+                <br />
+                Facultad de Ciencias y Tecnolog&iacute;a - DEI
+                <br />
+                &copy; 2013
+            </div>
+        </div>
+    
+    </div>
+    
+</body>
+
+</html>

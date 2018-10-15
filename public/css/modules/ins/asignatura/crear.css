@@ -1,0 +1,162 @@
+div.half-screen {
+	width: 400;
+	float: left;
+}
+
+div.half-screen > fieldset {
+    border-top: 3px solid #ccc;
+    width: 400px;
+    margin: 10px;
+    margin-bottom: 30px;
+}
+
+fieldset {
+	border: 0px;
+    border-top: 3px solid #ccc;
+    width: 500px;
+    margin: auto;
+}
+
+legend {
+    color: #223359;
+    font-size: 1.1em;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+label {
+    position: absolute;
+    text-align: right;
+    width: 110px;
+    margin-top: 12px;
+    margin-left: 20px;
+    color: #223359;
+}
+
+input[type="text"], input[type="password"] {
+    margin-left: 140px;
+    height: 20px;
+    width: 287px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #223359;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+input[type="checkbox"] label {
+	margin-left: 160px;
+}
+
+input[type="checkbox"] {
+	margin-left: 140px;
+	margin-top: 15px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+select {
+    margin-left: 140px;
+    border: 1px solid #bbb;
+    width: 300px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #223359;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+select:hover {
+    background-color: 
+    color: #fff;
+}
+
+input[type="submit"] {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    border: 0px;
+    background-color: silver;
+    height: 30px;
+    width: 100px;
+    padding: 5px;
+    color: #223359;
+    font-weight: bold;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #223359;
+    color: #fff;
+}
+
+textarea {
+    resize: none;
+    margin-left: 140px;
+    height: 80px;
+    width: 600px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #223359;
+    font-family: Arial;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+button {
+    min-width: 100px;
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    height: 30px;
+    padding: 5px 10px;
+    color: #223359;
+    background-color: silver;
+    border: 0px;
+    font-weight: bold;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+button:hover {
+    background-color: #223359;
+    color: #fff;
+}
+  
+.error {
+    width: 500px;
+    margin: auto;
+}
+
+form a.link-interior {
+    margin-left: 200px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#buttons {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#buttons a {
+	color: #223359;
+	text-decoration: none;
+	cursor: pointer;
+	margin: 10px;
+	font-weight: bold;
+}
+
+.center {
+	text-align: center;
+}

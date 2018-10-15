@@ -1,0 +1,134 @@
+<?php $this->headTitle()->prepend('Encuestas'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/index.css')); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+
+<a class="standard-button" href="crear" title="Crear Nueva Encuesta">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ENCUESTA
+</a>
+
+<br />
+<br />
+
+<form action="index" method="post">
+	<fieldset>
+		<legend>BUSCAR ENCUESTAS</legend>
+
+		<input type="hidden" name="enc_particular_id" id="enc_particular_id" value="<?php echo $this->encuesta["enc_particular_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="N" />
+
+		<label for="periodo_lectivo_id">PER. LECTIVO<span class="required-field"> * </span></label>
+		<select id="periodo_lectivo_id" name="periodo_lectivo_id" tabindex="2">
+			<option <?php echo ($this->perLecSel == "none" ? 'selected="selected"' : null); ?> value="none">-- Todos los periodos lectivos --</option>
+			<?php foreach ($this->periodos as $periodo): ?>
+				<option value="<?php echo $periodo["periodo_lectivo_id"] ?>" <?php echo ($this->perLecSel == $periodo["periodo_lectivo_id"] ? 'selected="selected"' : null); ?>><?php echo $periodo["periodo"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+
+		<label for="asignatura_id">ASIGNATURA<span class="required-field"> * </span></label>
+		<select id="asignatura_id" name="asignatura_id" tabindex="3">
+			<option <?php echo ($this->asigSel == "none" ? 'selected="selected"' : null); ?> value="none">-- Todas las asignaturas --</option>
+			<?php foreach ($this->asignaturas as $asignatura): ?>
+				<option value="<?php echo $asignatura["asignatura_id"] ?>" <?php echo ($this->asigSel == $asignatura["asignatura_id"] ? 'selected="selected"' : null); ?>><?php echo $asignatura["nombre"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+
+		<label for="docente_id">DOCENTE<span class="required-field"> * </span></label>
+		<select id="docente_id" name="docente_id" tabindex="4">
+			<option <?php echo ($this->docenteSel == "none" ? 'selected="selected"' : null); ?> value="none">-- Todos los docentes --</option>
+			<?php foreach ($this->docentes as $docente): ?>
+				<option value="<?php echo $docente["docente_id"] ?>" <?php echo ($this->docenteSel == $docente["docente_id"] ? 'selected="selected"' : null); ?>><?php echo $docente["nombre"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+
+		<div class="center">
+			<input type="submit" name="buscar" id="buscar" value="BUSCAR" tabindex="5" />
+		</div>
+	</fieldset>
+</form>
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->encuestas)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin encuestas.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="20%">ENCUESTA</th>
+                <th width="15%">DOCENTE</th>
+                <th width="15%">ASIGNATURA</th>
+                <th width="15%">PERIODO LECTIVO</th>
+                <th width="9%">ACTIVO</th>
+				<th width="10%">INFORME</th>
+				<th width="8%">EDITAR</th>
+				<th width="8%">ELIMINAR</th>
+			</tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->encuestas as $encuesta): ?>
+            <tr>
+                <td>
+                    <a class="get-link" href="get?id=<?php echo $encuesta["enc_particular_id"]; ?>" title="Visualizar Plantilla">
+                        <?php echo $encuesta["encuesta"]; ?>
+                    </a>
+                </td>
+                <td><?php echo $encuesta["docente"]; ?></td>
+                <td><?php echo $encuesta["asignatura"]; ?></td>
+                <td><?php echo $encuesta["periodo"]; ?></td>
+				<td style="text-align: center;">
+					<a class="activar-button" href="activar?id=<?php echo $encuesta["enc_particular_id"]; ?>">
+						<?php if ($encuesta["activo"] == 'S'): ?>
+							<img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Clic para desactivar" />
+						<?php else: ?>
+							<img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Clic para activar" />
+						<?php endif; ?>
+					</a>
+				</td>
+                <td style="text-align: center;">
+                    <a class="activar-button" target="_blank" href="<?php echo $this->serverUrl() . $this->baseUrl("inf/docente/ver-informe?id=" . $encuesta["enc_particular_id"]); ?>">
+                    <img src="<?php echo $this->baseUrl('images/report.png'); ?>" title="Ver informe" />
+                    </a>
+                </td>
+                <td style="text-align: center">
+            	<?php if ($encuesta["activo"] == 'S'): ?>
+                	<a title="Solo se pueden editar plantillas no activas">
+				<?php else: ?>
+                    <a href="editar?id=<?php echo $encuesta["enc_particular_id"]; ?>" title="Clic para editar">
+                <?php endif; ?>
+                        <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+                    </a>
+                </td>
+                <td style="text-align: center">
+                <?php if ($encuesta["activo"] == 'S'): ?>
+                    <a title="Solo se pueden eliminar plantillas no activas">
+            	<?php else: ?>
+                	<a class="delete-button" href="borrar?id=<?php echo $encuesta["enc_particular_id"]; ?>" title="Clic para borrar">
+                    <?php endif; ?>
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crear Nueva Encuesta">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ENCUESTA
+</a>
+<br /><br /><br />
+
+<?php if (count($this->errors)): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $error): ?>
+    	<li><?php echo $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

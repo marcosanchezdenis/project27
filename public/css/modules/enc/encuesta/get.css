@@ -1,0 +1,90 @@
+h3.encuesta-title {
+    text-align: center;
+    color: #223359;
+    font-weight: bold;
+	text-transform: uppercase;
+}
+
+div.escala-utilizada {
+	margin: auto;
+}
+
+div.escala-utilizada h5 {
+	float: left;
+	color: #223359;
+	font-weight: bold;
+}
+
+ul.escala {
+	float: left;
+	padding: 0px;
+	list-style: none;
+}
+
+ul.escala li {
+	display: inline;
+	text-align: center;
+}
+
+span.separator {
+	margin: 10px;
+}
+
+table.visualizaciones {
+	width: 80%;
+	margin: auto;
+}
+
+table.visualizaciones th {
+	background-color: #A9D0F5;
+	text-align: center;
+}
+
+table.visualizaciones td.titulo {
+	width: 15%;
+}
+
+table.visualizaciones td.valor {
+	width: 50%;
+}
+
+div.links {
+	text-align: center;
+	color: #223359;
+}
+
+div.links a {
+	color: #223359;
+	text-decoration: none;
+	margin: 0px 5px;
+	padding: 5px 10px;
+}
+
+div.links a:hover {
+    border-bottom: 1px solid #BDBDBD;
+}
+
+dl {
+	width: 50%;
+	margin: 20px auto;
+}
+
+dd li.report {
+	margin: 5px 30px;
+	background: url('/encuestas/images/report.png') no-repeat;
+	list-style: none;
+}
+
+dd li.report a.get-link {
+	margin-left: 20px;
+}
+
+a.get-link {
+	font-weight: bold;
+	color: #223359;
+	text-decoration: none; 
+}
+
+a.get-link:hover {
+	color: #58ACFA;
+}

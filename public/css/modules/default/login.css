@@ -1,0 +1,74 @@
+fieldset {
+	border: 0px;
+}
+
+fieldset {
+	border-top: 3px solid #ccc;
+	border-bottom: 3px solid #ccc;
+	width: 500px;
+	margin: 30px auto;
+}
+
+legend {
+	color: #223359;
+	font-size: 1.1em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+legend {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+label[for="usuario"] {
+	position: absolute;
+	text-align: right;
+	width: 130px;
+	margin-top: 12px;
+	color: #223359;
+}
+
+label[for="contrasena"] {
+	position: absolute;
+	text-align: right;
+	width: 130px;
+	margin-top: 12px;
+	color: #223359;
+}
+
+input[type="text"],input[type="password"] {
+	margin-left: 140px;
+	height: 20px;
+	width: 200px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+input[type="submit"] {
+	cursor: pointer;
+	margin-left: 140px;
+	height: 30px;
+	width: 150px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	font-weight: bold;
+	border: 0px;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+/* textarea { margin-left: 140px; height: 35px; width: 200px; margin-top: 5px; margin-bottom: 5px;} */
+/* label.check, label.radio { position:relative; text-align:left; } */
+.error {
+	width: 500px;
+	margin: auto;
+}

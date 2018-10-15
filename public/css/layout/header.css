@@ -1,0 +1,36 @@
+/* ****************************************************************** */
+/* Configuracion del HEADER */
+/* ****************************************************************** */
+#header {
+	background-color: white;
+	min-width: 981px;
+}
+
+#header-container {
+	min-height: 100px;
+	width: 980px;
+	margin: 0 auto;
+    height: 171px;
+}
+
+#main-logo {
+    width: 171px;
+    height: 171px;
+    text-align: center;
+    float: left;
+}
+
+#main-logo img {
+	padding: 15% 0;
+    vertical-align: middle;
+}
+
+#main-banner {
+	width: 800px;
+	height: 171px;
+	float: right;
+}
+
+#main-banner img {
+	float: right;
+}

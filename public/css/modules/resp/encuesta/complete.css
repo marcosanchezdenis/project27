@@ -1,0 +1,59 @@
+div.fixed {
+	width: inherit;
+	margin: auto;
+	top: 0px;
+	position: fixed;
+	z-index: 10;
+	border-bottom: 3px solid black;
+	padding-top: 10px;
+}
+
+div.detalle {
+	text-align: center;
+	width: 90%
+}
+
+div.detalle label {
+	color: #223359;
+	text-transform: uppercase;
+}
+
+select.answer-pregunta-escalada	 {
+	width: 100%;
+	margin: 0px;
+	border: 0px;
+	background-color: inherit;
+}
+
+form {
+	text-align: center;
+}
+
+#send-form {
+	border: 0px;
+	background-color: inherit;
+	font-weight: bold;
+}
+
+textarea.answer-pregunta-abierta {
+	width: 100%;
+	border: none;
+	background-color: inherit;
+	resize: none;
+	font-family: inherit;
+}
+
+textarea::-webkit-input-placeholder {
+	font-style: italic;
+}
+
+textarea::-moz-input-placeholder {
+	font-style: italic;
+}
+
+.scrollbanner {
+	overflow-x: auto; 
+	overflow-y: hidden; 
+	background-color: white; 
+	text-align: center;
+}

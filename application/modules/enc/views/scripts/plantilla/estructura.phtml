@@ -1,0 +1,431 @@
+<?php $this->headTitle()->prepend('Estructura'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/get.css')); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/estructura.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/enc/plantilla/estructura.js')); ?>
+
+<div class="links">
+<a href="<?php echo $this->baseUrl('enc/plantilla/index'); ?>">&#x21a9; Volver al Listado</a>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/editar?id=' . $this->results['encuesta_id']); ?>">Modificar Datos Principales</a>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/get?id=' . $this->results['encuesta_id']); ?>">Vista Previa Plantilla</a>
+</div>
+
+<hr class="separator" />
+
+<div><h3 class="encuesta-title"><?php echo $this->results["encuesta"]; ?></h3></div>
+
+<div class="escala-utilizada">
+	<h5>Escala:<span class="separator"></span></h5>
+	<ul class="escala">
+	<?php foreach ($this->results["valores"] as $valor): ?>
+		<li><span class="separator"></span><b><?php echo '(' . $valor["valor"] . ') '; ?></b><?php echo $valor["descrip"]; ?></li>
+	<?php endforeach; ?>
+	</ul>
+</div>
+
+<table class="encuesta">
+	<thead>
+		<tr>
+			<th class="botonera" colspan="2">
+				<button class="add-categoria" title="Crear Categoria" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Categoria</button>
+				<button class="add-preg-abierta" title="Crear Pregunta Abierta" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Preg. Abierta</button>
+				<button class="add-preg-escala" title="Crear Pregunta con Escala" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Preg. Escalada</button>
+				<button class="add-preg-sm" title="Crear Seleccion Multiple" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Sel. M&uacute;ltiple</button>
+			</th>
+			<th class="answer-field">ACCIONES</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+	<?php $catEnum = 65; $pregEnum = 1; ?>
+	<?php foreach ($this->results["Categorias"] as $categoria): ?>
+		<tr class="categoria agregable">
+			<td colspan="2">
+				<?php echo chr($catEnum) . '. ' . $categoria["categoria"]; ?>
+				<div class="botonera" style="display: none;">
+					<button class="add-categoria" title="Crear Categoria" tipo="categoria" padre_id="<?php echo $categoria["categoria_id"]; ?>" padre="<?php echo $categoria["categoria"]; ?>">+ Categoria</button>
+					<button class="add-preg-abierta" title="Crear Pregunta Abierta" tipo="categoria" padre_id="<?php echo $categoria["categoria_id"]; ?>" padre="<?php echo $categoria["categoria"]; ?>">+ Preg. Abierta</button>
+					<button class="add-preg-escala" title="Crear Pregunta con Escala" tipo="categoria" padre_id="<?php echo $categoria["categoria_id"]; ?>" padre="<?php echo $categoria["categoria"]; ?>">+ Preg. Escalada</button>
+					<button class="add-preg-sm" title="Crear Seleccion Multiple" tipo="categoria" padre_id="<?php echo $categoria["categoria_id"]; ?>" padre="<?php echo $categoria["categoria"]; ?>">+ Sel. M&uacute;ltiple</button>
+				</div>
+			</td>
+			<td class="buttons">
+				<img class="edit-categoria" id="id=<?php echo $categoria["categoria_id"]; ?>&padre=encuesta&padre_id=<?php echo $this->results["encuesta_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Categoria" />
+				<a href="borrar-categoria?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $categoria["categoria_id"]; ?>" title="Borrar Categoria">
+					<img class="delete-button" src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" title="Borrar Categoria" />
+				</a>
+			</td>
+		</tr>
+		<tbody>
+			<?php foreach ($categoria["Preguntas"] as $catPregunta): ?>
+			
+			<?php if ($catPregunta["tipo"] == 'A'): ?>
+			<tr class="pregunta-abierta">
+				<td class="enum">
+				    <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+				        <span class="required-field"> * </span>
+				    <?php endif; ?>
+				    <?php echo $pregEnum++ ?>
+				</td>
+				
+				<td><?php echo $catPregunta["pregunta"]; ?></td>
+				
+				<td class="buttons">
+	                <img class="edit-preg-abierta" id="id=<?php echo $catPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $categoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+					<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $catPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+	                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+	                </a>
+				</td>
+			</tr>
+			
+			<?php elseif ($catPregunta["tipo"] == 'E'): ?>
+			<tr class="pregunta-escala">
+				<td class="enum">
+				    <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+				        <span class="required-field"> * </span>
+				    <?php endif; ?>
+				    <?php echo $pregEnum++; ?>
+			    </td>
+			    
+				<td><?php echo $catPregunta["pregunta"]; ?></td>
+				
+				<td class="buttons">
+					<img class="edit-preg-escala" id="id=<?php echo $catPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $categoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+					<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $catPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+	                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+	                </a>
+				</td>
+			</tr>
+			
+			<?php elseif ($catPregunta["tipo"] == 'S'): ?>
+			<tr class="pregunta-seleccion">
+				<td class="enum" rowspan="2">
+				    <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+				        <span class="required-field"> * </span>
+				    <?php endif; ?>
+				    <?php echo $pregEnum++; ?>
+				</td>
+				
+				<td><?php echo $catPregunta["pregunta"]; ?></td>
+				
+				<td class="buttons" rowspan="2">
+					<img class="edit-preg-sm" id="id=<?php echo $catPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $categoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+					<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $catPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+	                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+	                </a>
+				</td>
+			</tr>
+			<tr class="pregunta-seleccion">
+			    <td class="opciones">
+    			    <?php $i=1; ?>
+    				<?php foreach ($catPregunta["Opciones"] as $opcion): ?>
+    				    <span class="separator"></span>
+    					<?php echo $i . ' (' . $opcion["nombre"] . ')'; ?>
+    					<br />
+    					<?php $i++; ?>
+    				<?php endforeach; ?>
+    			</td>
+			</tr>
+			<?php endif; ?>
+			<?php endforeach; ?>
+		</tbody>
+		
+		<tbody>
+		<?php $subCatEnum = 1; ?>
+		<?php foreach ($categoria["Categorias"] as $subCategoria): ?>
+			<tr class="subcategoria agregable">
+				<td colspan="2">
+					<?php echo chr($catEnum) . '.' . $subCatEnum . '. ' . $subCategoria["categoria"]; ?>
+					<div class="botonera" style="display: none;">
+						<button class="add-preg-abierta" title="Crear Pregunta Abierta" tipo="categoria" padre_id="<?php echo $subCategoria["categoria_id"]; ?>" padre="<?php echo $subCategoria["categoria"]; ?>">+ Preg. Abierta</button>
+						<button class="add-preg-escala" title="Crear Pregunta con Escala" tipo="categoria" padre_id="<?php echo $subCategoria["categoria_id"]; ?>" padre="<?php echo $subCategoria["categoria"]; ?>">+ Preg. Escalada</button>
+						<button class="add-preg-sm" title="Crear Seleccion Multiple" tipo="categoria" padre_id="<?php echo $subCategoria["categoria_id"]; ?>" padre="<?php echo $subCategoria["categoria"]; ?>">+ Sel. M&uacute;ltiple</button>
+					</div>
+				</td>
+				<td class="buttons">
+					<img class="edit-categoria" id="id=<?php echo $subCategoria["categoria_id"]; ?>&padre=categoria&padre_id=<?php echo $categoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar SubCategoria" />
+					<a href="borrar-categoria?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $subCategoria["categoria_id"]; ?>" title="Borrar SubCategoria">
+	                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+	                </a>
+				</td>
+			</tr>
+			<tbody>
+				<?php foreach ($subCategoria["Preguntas"] as $subPregunta): ?>
+				
+				<?php if ($subPregunta["tipo"] == 'A'): ?>
+				<tr class="pregunta-abierta">
+					<td class="enum">
+					    <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+    				        <span class="required-field"> * </span>
+    				    <?php endif; ?>
+    				    <?php echo $pregEnum++; ?>
+				    </td>
+				    
+				    <td><?php echo $subPregunta["pregunta"]; ?></td>
+				    
+					<td class="buttons">
+						<img class="edit-preg-abierta" id="id=<?php echo $subPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $subCategoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+						<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $subPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+		                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+		                </a>
+					</td>
+				</tr>
+				
+				<?php elseif ($subPregunta["tipo"] == 'E'): ?>
+				<tr class="pregunta-escala">
+					<td class="enum">
+					    <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+    				        <span class="required-field"> * </span>
+    				    <?php endif; ?>
+					    <?php echo $pregEnum++; ?>
+					</td>
+					
+					<td><?php echo $subPregunta["pregunta"]; ?></td>
+					
+					<td class="buttons">
+						<img class="edit-preg-escala" id="id=<?php echo $subPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $subCategoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+						<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $subPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+		                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+		                </a>
+					</td>
+				</tr>
+				
+				<?php elseif ($subPregunta["tipo"] == 'S'): ?>
+				<tr class="pregunta-seleccion">
+					<td class="enum" rowspan="2">
+					    <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+    				        <span class="required-field"> * </span>
+    				    <?php endif; ?>
+    				    <?php echo $pregEnum++; ?>
+					</td>
+					
+					<td><?php echo $subPregunta["pregunta"]; ?></td>
+					
+					<td class="buttons" rowspan="2">
+						<img class="edit-preg-sm" id="id=<?php echo $subPregunta["pregunta_id"]; ?>&padre=categoria&padre_id=<?php echo $subCategoria["categoria_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+						<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $subPregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+		                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+		                </a>
+					</td>
+				</tr>
+				<tr class="pregunta-seleccion">
+					<td class="opciones">
+        			    <?php $i=1; ?>
+        				<?php foreach ($subPregunta["Opciones"] as $opcion): ?>
+        				    <span class="separator"></span>
+        					<?php echo $i . ' (' . $opcion["nombre"] . ')'; ?>
+        					<br />
+        					<?php $i++; ?>
+        				<?php endforeach; ?>
+        			</td>
+				</tr>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</tbody>
+		<?php $subCatEnum++; ?>
+		<?php endforeach; ?>
+		</tbody>
+		<?php $catEnum++; ?>
+	<?php endforeach; ?>
+	
+	<?php foreach ($this->results["Preguntas"] as $pregunta): ?>
+		
+		<?php if ($pregunta["tipo"] == 'A'): ?>
+		<tr class="pregunta-abierta">
+			<td class="enum">
+			    <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+		    </td>
+		    
+		    <td><?php echo $pregunta["pregunta"]; ?></td>
+		    
+			<td class="buttons">
+				<img class="edit-preg-abierta" id="id=<?php echo $pregunta["pregunta_id"]; ?>&padre=encuesta&padre_id=<?php echo $this->results["encuesta_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+				<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $pregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+                </a>
+			</td>
+		</tr>
+		
+		<?php elseif ($pregunta["tipo"] == 'E'): ?>
+		<tr class="pregunta-escala">
+			<td class="enum">
+			    <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+		    </td>
+		    
+			<td><?php echo $pregunta["pregunta"]; ?></td>
+			
+			<td class="buttons">
+				<img class="edit-preg-escala" id="id=<?php echo $pregunta["pregunta_id"]; ?>&padre=encuesta&padre_id=<?php echo $this->results["encuesta_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+				<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $pregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+                </a>
+			</td>
+		</tr>
+		
+		<?php elseif ($pregunta["tipo"] == 'S'): ?>
+		<tr class="pregunta-seleccion">
+			<td class="enum" rowspan="2">
+			    <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+			</td>
+			
+			<td><?php echo $pregunta["pregunta"]; ?></td>
+			
+			<td class="buttons" rowspan="2">
+				<img class="edit-preg-sm" id="id=<?php echo $pregunta["pregunta_id"]; ?>&padre=encuesta&padre_id=<?php echo $this->results["encuesta_id"]; ?>" src="<?php echo $this->baseUrl(); ?>/images/record_edit.png" title="Editar Pregunta" />
+				<a href="borrar-pregunta?enc=<?php echo $this->results["encuesta_id"]; ?>&id=<?php echo $pregunta["pregunta_id"]; ?>" title="Borrar Pregunta">
+                	<img src="<?php echo $this->baseUrl(); ?>/images/record_delete.png" />
+                </a>
+			</td>
+		</tr>
+		
+		<tr class="pregunta-seleccion">
+			<td class="opciones">
+			    <?php $i=1; ?>
+				<?php foreach ($pregunta["Opciones"] as $opcion): ?>
+				    <span class="separator"></span>
+					<?php echo $i . ' (' . $opcion["nombre"] . ')'; ?>
+					<br />
+					<?php $i++; ?>
+				<?php endforeach; ?>
+			</td>
+		</tr>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</tbody>
+	
+	<thead>
+		<tr>
+			<th class="botonera" colspan="2">
+				<button class="add-categoria" title="Crear Categoria" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Categoria</button>
+				<button class="add-preg-abierta" title="Crear Pregunta Abierta" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Preg. Abierta</button>
+				<button class="add-preg-escala" title="Crear Pregunta con Escala" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Preg. Escalada</button>
+				<button class="add-preg-sm" title="Crear Seleccion Multiple" tipo="encuesta" padre_id="<?php echo $this->results["encuesta_id"]; ?>" padre="<?php echo $this->results["encuesta"]; ?>">+ Sel. M&uacute;ltiple</button>
+			</th>
+			<th class="answer-field">ACCIONES</th></tr>
+	</thead>
+</table>
+
+<div id="add-categoria-dialog" title="Categoria">
+	<form id="add-categoria-form" action="categoria" method="post">
+		<fieldset>
+		    <label class="add-categoria-padre"></label><br />
+			<input type="hidden" name="redirect" value="<?php echo $this->results["encuesta_id"]; ?>" />
+			<input type="hidden" name="padre-id" class="padre-id" />
+			<input type="hidden" name="padre" class="padre">
+			<input type="hidden" name="categoria_id" class="categoria_id" value="" />
+			
+			<label>Categoria:</label>
+			<textarea id="nombre" name="nombre" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<label>Descripcion:</label>
+			<textarea id="descripcion" name="descripcion" class="text ui-corner-all" rows="2" cols="55"></textarea>
+		</fieldset>
+	</form>
+</div>
+
+<div id="add-preg-abierta-dialog" title="Pregunta Abierta">
+	<form id="add-preg-abierta-form" action="preg-abierta" method="post">
+		<fieldset>
+		    <label class="add-preg-abierta-padre"></label><br />
+			<input type="hidden" name="redirect" value="<?php echo $this->results["encuesta_id"]; ?>" />
+			<input type="hidden" name="tipo" value="A" />
+			
+			<input type="hidden" name="padre-id" class="padre-id" />
+			<input type="hidden" name="padre" class="padre" />
+			<input type="hidden" name="pregunta_id" class="pregunta_id" value="" />
+			
+			<label>Pregunta:</label>
+			<textarea id="pregunta" name="pregunta" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<label>Descripcion:</label>
+			<textarea id="descripcion" name="descripcion" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<br />
+			<input type="checkbox" id="es_obligatoria_abierta" name="es_obligatoria" align="middle" />
+			<label for="es_obligatoria_abierta" class="inline"> Pregunta Obligatoria</label>
+		</fieldset>
+	</form>
+</div>
+
+<div id="add-preg-escala-dialog" title="Pregunta Escalada">
+	<form id="add-preg-escala-form" action="preg-escala" method="post">
+		<fieldset>
+		    <label class="add-preg-escala-padre"></label><br />
+			<input type="hidden" name="redirect" value="<?php echo $this->results["encuesta_id"]; ?>" />
+			<input type="hidden" name="tipo" value="E" />
+			
+			<input type="hidden" name="padre-id" class="padre-id" />
+			<input type="hidden" name="padre" class="padre" />
+			<input type="hidden" name="pregunta_id" class="pregunta_id" value="" />
+			
+			<label>Pregunta:</label>
+			<textarea id="pregunta" name="pregunta" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<label>Descripcion:</label>
+			<textarea id="descripcion" name="descripcion" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<br />
+			<input type="checkbox" id="es_obligatoria_escala" name="es_obligatoria" align="middle" />
+			<label for="es_obligatoria_escala" class="inline"> Pregunta Obligatoria</label>
+		</fieldset>
+	</form>
+</div>
+
+<div id="add-preg-sm-dialog" title="Seleccion Multiple">
+	<form id="add-preg-sm-form" action="preg-sm" method="post">
+		<fieldset>
+		    <label class="add-preg-sm-padre"></label><br />
+			<input type="hidden" name="redirect" value="<?php echo $this->results["encuesta_id"]; ?>" />
+			<input type="hidden" name="tipo" value="S" />
+			
+			<input type="hidden" name="padre-id" class="padre-id" />
+			<input type="hidden" name="padre" class="padre" />
+			<input type="hidden" name="pregunta_id" class="pregunta_id" value="" />
+			
+			<label>Pregunta:</label>
+			<textarea id="pregunta" name="pregunta" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<label>Descripcion:</label>
+			<textarea id="descripcion" name="descripcion" class="text ui-corner-all" rows="2" cols="55"></textarea>
+			
+			<br />
+			<input type="checkbox" id="es_obligatoria_sm" name="es_obligatoria" align="middle" />
+			<label for="es_obligatoria_sm" class="inline"> Pregunta Obligatoria</label>
+			
+			<br />
+			<input type="checkbox" id="opcion_multiple" name="opcion_multiple" align="middle" />
+			<label for="opcion_multiple" class="inline"> Permitir Multiples Respuestas</label>
+			<br /><br />
+			
+			<label class="inline">Opciones: </label>
+			<div id="opciones"></div>
+			<div id="buttons">
+        		<a name="agregar-opcion" id="agregar-opcion">AGREGAR VALOR</a>
+        		|
+        		<a name="borrar-opcion" id="borrar-opcion">ELIMINAR VALOR</a>
+        		|
+        		<a name="borrar-todo" id="borrar-todo">ELIMINAR TODOS</a>
+    		</div>
+		</fieldset>
+	</form>
+</div>
+
+<hr class="separator" />
+
+<div class="links">
+<a href="<?php echo $this->baseUrl('enc/plantilla/index'); ?>">&#x21a9; Volver al Listado</a>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/editar?id=' . $this->results['encuesta_id']); ?>">Modificar Datos Principales</a>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/get?id=' . $this->results['encuesta_id']); ?>">Vista Previa Plantilla</a>
+</div>

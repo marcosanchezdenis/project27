@@ -1,0 +1,82 @@
+<?php $this->headTitle()->prepend('Asignaturas'); ?>
+
+<a class="standard-button" href="crear" title="Crea una nueva asignatura">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ASIGNATURA
+</a>
+
+<br />
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->asignaturas)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin asignaturas.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="10%">CODIGO</th>
+                <th width="20%">ASIGNATURA</th>
+                <th width="20%"">CARRERA</th>
+                <th width="10%">HABILITADA</th>
+                <th width="10%">EDITAR</th>
+                <th width="10%">ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->asignaturas as $asignatura): ?>
+            <tr>
+                <td style="text-align: center;"><?php echo $asignatura["codigo"]; ?></td>
+                <td><?php echo $asignatura["nombre"]; ?></td>
+                <td><?php echo $asignatura["carrera"]; ?></td>
+                <td style="text-align: center;">
+                    <a href="activar?id=<?php echo $asignatura["asignatura_id"]; ?>">
+                    <?php if ($asignatura["activo"] == 'S'): ?>
+                        <img src="<?php echo $this->baseUrl('images/activo.png'); ?>" title="Clic para dehabilitar" />
+                    <?php else: ?>
+                        <img src="<?php echo $this->baseUrl('images/no-activo.png'); ?>" title="Clic para habilitar" />
+                    <?php endif; ?>
+                    </a>
+                </td>
+                <td style="text-align: center">
+            	<?php if ($asignatura["activo"] == 'S'): ?>
+                	<a title="Solo se pueden editar asignaturas no activas">
+				<?php else: ?>
+                    <a href="editar?id=<?php echo $asignatura["asignatura_id"]; ?>" title="Clic para editar">
+                <?php endif; ?>
+                        <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+                    </a>
+                </td>
+                <td style="text-align: center">
+                <?php if ($asignatura["activo"] == 'S'): ?>
+                    <a title="Solo se pueden eliminar asignaturas no activas">
+            	<?php else: ?>
+                	<a class="delete-button" href="borrar?id=<?php echo $asignatura["asignatura_id"]; ?>" title="Clic para borrar">
+                    <?php endif; ?>
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crea una nueva asignatura">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ASIGNATURA
+</a>
+<br /><br /><br />
+
+<?php if (count($this->errors)): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $error): ?>
+    	<li><?php echo $error; ?></li>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

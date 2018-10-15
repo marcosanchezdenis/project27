@@ -1,0 +1,41 @@
+/* ****************************************************************** */
+/* Configuracion General de la Pagina */
+/* ****************************************************************** */
+html, body {
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	height: 100%;
+	font-family: Arial;
+	font-weight: 300;
+}
+
+/* Todos los div del body */
+body > div {
+	/*border: black solid 1px;*/
+	color: black;
+	background-color: white;
+}
+
+/* Herencia para todos los demás objetos de la pagina */
+* {
+    border: inherit;
+    color: inherit;
+    background-color: inherit;
+}
+
+/* Todos los div que sean contenedores */
+div.container {
+    margin: auto;
+    width: auto;
+}
+
+#main-container {
+	background-color: #F2F2F2;
+	min-height: 100%;
+	position: relative;
+}
+
+hr.separator {
+	margin: 15px 0px;
+}

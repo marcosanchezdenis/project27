@@ -1,0 +1,76 @@
+<?php $this->headTitle()->prepend('Editar Usuario'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/adm/usuario/crear.js')); ?>
+
+<form id="crear-usuario" action="editar" method="post">
+
+	<fieldset>
+	    <legend>DATOS DE USUARIO</legend>
+	    
+	    <input type="hidden" name="usuario_id" id="usuario_id" value="<?php echo $this->usuario["usuario_id"]; ?>" />
+		<input type="hidden" name="persona_id" id="persona_id" value="<?php echo $this->usuario["persona_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="<?php echo $this->usuario["activo"]; ?>" />
+		
+		<label for="usuario">USUARIO<span class="required-field"> * </span></label>
+		<input type="text" name="usuario" id="usuario" tabindex="1" value="<?php echo $this->usuario["usuario"]; ?>" />
+		<span id="usuarioInfo"></span><br />
+		
+		<label for="nombre">NOMBRE<span class="required-field"> * </span></label>
+		<input type="text" name="nombre" id="nombre" tabindex="2" value="<?php echo $this->usuario["nombre"]; ?>" />
+		<span id="nombreInfo"></span><br />
+		
+		<label for="apellido">APELLIDO<span class="required-field"> * </span></label>
+		<input type="text" name="apellido" id="apellido" tabindex="3" value="<?php echo $this->usuario["apellido"]; ?>" />
+		<span id="apellidoInfo"></span><br />
+		
+		<label for="email">EMAIL</label>
+		<input type="text" name="email" id="email" tabindex="4" value="<?php echo $this->usuario["email"]; ?>" />
+		<span id="emailInfo"></span><br />
+		
+		<?php if ($this->usuario["es_docente"] == "N"): ?>
+    		<label for="es_docente">ES DOCENTE</label>
+        	<input type="checkbox" name="es_docente" id="es_docente" tabindex="4" align="middle" <?php echo ($this->usuario["es_docente"] == "S") ? ('checked=checked') : (null); ?> />
+    	<?php endif; ?>
+	</fieldset>
+	
+	<fieldset>
+		<legend>ASIGNACI&Oacute;N DE ROLES</legend>
+		
+		<div id="nuevos-roles">
+		    <?php foreach ($this->usuario['roles'] as $rolUsuario): ?>
+		        <div class="usuario_perm">
+		            <label for="usuario_perm_id">ROL <span class="required-field"> * </span></label>
+	                <select id="usuario_perm_id" name="roles[]" tabindex="7">
+	                    <?php foreach ($this->roles as $rol): ?>
+            				<option value="<?php echo $rol["rol_id"]; ?>" <?php echo ($rolUsuario["rol_id"] == $rol["rol_id"] ? 'selected="selected"' : null); ?>><?php echo $rol["nombre"]; ?></option>
+            			<?php endforeach; ?>
+	                </select>
+                </div>
+		    <?php endforeach; ?>
+		</div>
+		<div id="buttons">
+    		<a name="agregar-rol" id="agregar-rol">AGREGAR ROL</a>
+    		|
+    		<a name="borrar-rol" id="borrar-rol">ELIMINAR ROL</a>
+    		|
+    		<a name="borrar-todo" id="borrar-todo">ELIMINAR TODOS</a>
+		</div>
+	</fieldset>
+	
+	<div class="center">
+        <input type="submit" name="crear" id="crear" value="GUARDAR" tabindex="7" />
+        <a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+	</div>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

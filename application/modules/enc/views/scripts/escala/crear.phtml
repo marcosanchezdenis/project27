@@ -1,0 +1,50 @@
+<?php $this->headTitle()->prepend('Crear Escala'); ?>
+<?php $this->headlink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/datos-principales.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/enc/escala/crear.js')); ?>
+
+<form id="crear-escala" action="crear" method="post">
+	<fieldset>
+		<legend>DATOS DE LA ESCALA</legend>
+		
+		<input type="hidden" name="escala_id" id="escala_id" value="<?php echo $this->escala["escala_id"]; ?>" />
+		
+		<label for="nombre">NOMBRE<span class="required-field"> * </span></label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->escala["nombre"]; ?>" />
+		<span id="nombreInfo"></span><br />
+		
+		<label for="descripcion">DESCRIPCION</label>
+		<textarea name="descripcion" rows="3" cols="50" tabindex="2"><?php echo $this->escala["descripcion"]; ?></textarea><br />
+	</fieldset>
+	
+	<fieldset>
+		<legend>VALORES DE LA ESCALA</legend>
+		
+		<div id="nuevos-valores"></div>
+		<div id="buttons">
+    		<a name="agregar-valor" id="agregar-valor">AGREGAR VALOR</a>
+    		|
+    		<a name="borrar-valor" id="borrar-valor">ELIMINAR VALOR</a>
+    		|
+    		<a name="borrar-todo" id="borrar-todo">ELIMINAR TODOS</a>
+		</div>
+		
+		<span class="error" style="display: none;" id="valoresInfo">Debe crear valores para la escala</span>
+	</fieldset>
+		
+	<div class="center">
+    	<input type="submit" name="crear" id="crear" value="CREAR" tabindex="4" />
+    	<a href="<?php echo $this->baseUrl('/enc/escala/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+	</div>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

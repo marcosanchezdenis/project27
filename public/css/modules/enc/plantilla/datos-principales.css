@@ -1,0 +1,209 @@
+fieldset {
+	border: 0px;
+}
+
+fieldset {
+	border-top: 3px solid #ccc;
+	width: 600px;
+	margin: auto;
+}
+
+legend {
+	color: #223359;
+	font-size: 1.1em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+legend {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+label {
+	position: absolute;
+	text-align: right;
+	width: 110px;
+	margin-top: 12px;
+	margin-left: 20px;
+	color: #223359;
+}
+
+input[type="text"], input[type="password"] {
+	margin-left: 140px;
+	height: 20px;
+	width: 400px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+input[id="anho_lectivo"] {
+	width: 188px;
+}
+
+select[id="escala_id"] {
+    margin-left: 140px;
+	width: 100px;
+	border: 1px solid #bbb;
+    width: 200px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+	padding: 5px;
+    color: #223359;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+select[id="escala_id"]:hover {
+	background-color: 
+    color: #fff;
+}
+
+select[id="periodo_id"] {
+    margin-left: 140px;
+	width: 100px;
+	border: 1px solid #bbb;
+    width: 200px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+	padding: 5px;
+    color: #223359;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+select[id="periodo_id"]:hover {
+	background-color: 
+    color: #fff;
+}
+
+input[type="submit"] {
+	margin-top: 15px;
+    margin-bottom: 5px;
+	border: 0px;
+	background-color: silver;
+	height: 30px;
+	width: 100px;
+	padding: 5px;
+	color: #223359;
+	font-weight: bold;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+}
+
+input[type="submit"]:hover {
+    background-color: #223359;
+    color: #fff;
+}
+
+textarea {
+	resize: none;
+	margin-left: 140px;
+	height: 80px;
+	width: 400px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	font-family: Arial;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+button[id="cancelar"] {
+	width: 100px;
+	margin-left: 15px;
+	margin-top: 15px;
+	margin-bottom: 5px;
+	height: 30px;
+	padding: 5px;
+	color: #223359;
+	background-color: silver;
+	border: 0px;
+	font-weight: bold;
+	border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+}
+
+button[id="cancelar"]:hover {
+    background-color: #223359;
+	color: #fff;
+}
+  
+.error {
+	width: 500px;
+	margin: auto;
+}
+
+form a.link-interior {
+	margin-left: 200px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#buttons {
+	margin: 10px auto;
+	text-align: center;
+}
+
+#buttons a {
+	color: #223359;
+	text-decoration: none;
+	cursor: pointer;
+	margin: 10px;
+	font-weight: bold;
+}
+
+.center {
+	text-align: center;
+}
+
+.escala_valor label {
+	position: absolute;
+	text-align: right;
+	width: 100px;
+	margin-top: 12px;
+	margin-left: 5px;
+	color: #223359;
+}
+
+.escala_valor input.valor {
+	margin-left: 110px;
+	height: 20px;
+	width: 40px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
+.escala_valor input.descrip {
+	margin-left: 110px;
+	height: 20px;
+	width: 300px;
+	margin-top: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	color: #223359;
+	border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+}

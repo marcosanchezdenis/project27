@@ -1,0 +1,111 @@
+div#indice {
+	width: 30%;
+	float: left;
+}
+
+div#informe {
+	width: 70%;
+	float: left;
+}
+
+p {
+	text-align: justify;
+	text-indent: 20px;
+	margin: 5px auto;
+}
+
+span.resaltado {
+	font-weight: bold;
+}
+
+ol {
+	margin: auto;
+	margin-left: 30px;
+	font-weight: bold;
+	list-style-type: upper-roman;
+}
+
+ol.num-alpha {
+	list-style-type: upper-alpha;
+}
+
+ol.num-alpha {
+	list-style-type: upper-alpha;
+}
+
+ol.num-digit {
+	list-style-type: decimal;
+}
+
+ol.num-digit li {
+	list-style-type: decimal;
+	font-weight: normal;
+}
+
+ol.num-normal {
+	list-style-type: circle;
+}
+
+ol.num-normal li {
+	list-style-type: circle;
+	font-weight: normal;
+}
+
+ol.indice {
+	color: #223359;
+}
+
+ol li.indice {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+ol li.indice a {
+	text-decoration: none;
+	color: #223359;
+}
+
+ol li.indice a:hover {
+	color: #58ACFA;
+}
+
+div.links {
+	text-align: center;
+	font-weight: bold;
+	margin-bottom: 15px;
+	color: #223359;
+}
+
+div.links a {
+	color: #223359;
+	text-decoration: none;
+	margin: 0px 5px;
+	padding: 5px 10px;
+}
+
+div.links a:hover {
+	color: #58ACFA;
+    border-bottom: 1px solid #BDBDBD;
+}
+
+div.propietario {
+	font-weight: bold;
+	text-align: center;
+	width: 80%;
+	margin: 20px auto;
+	color: #223359;
+}
+
+a.up {
+	display: block;
+	float: right;
+	text-decoration: none;
+	font-weight: bold;
+	color: #223359;
+	cursor: pointer;
+}
+
+a.up:hover {
+	color: #58ACFA;
+}

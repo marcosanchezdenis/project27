@@ -1,0 +1,51 @@
+<h2>
+	II. Glosario de conceptos contemplados en el instrumento de evaluaci&oacute;n de la praxis docente
+</h2>
+
+<p>
+	Con el glosario se pretende explicitar el significado de las dimensiones, subdimensiones e 
+	&iacute;tems de la pr&aacute;ctica docente, que han sido evaluadas por los estudiantes. Esto 
+	permitir&aacute; a cada docente tener una idea de lo que pedag&oacute;gicamente significa el 
+	grado de presencia o ausencia de un indicador.
+</p>
+
+<?php if (count($this->encuesta['Categorias']) > 0): ?>
+<ol class="num-alpha">
+<?php foreach ($this->encuesta['Categorias'] as $categoria): ?>
+	<li>
+	    <span class="resaltado"><?php echo $categoria['categoria']; ?></span>
+	    <?php echo ($categoria['descripcion']) ? (': ' . $categoria['descripcion']) : (""); ?>
+	<?php if (count($categoria['Preguntas']) > 0): ?>
+	    <ol class="num-normal">
+	    <?php foreach ($categoria['Preguntas'] as $pregunta): ?>
+	        <li>
+	            <span class="resaltado"><?php echo $pregunta['pregunta'] ?></span>
+	            <?php echo ($pregunta['descripcion']) ? (': ' . $pregunta['descripcion']) : (""); ?>
+            </li>
+	    <?php endforeach; ?>
+	    </ol>
+	<?php endif; ?>
+	<?php if (count($categoria['Categorias']) > 0): ?>
+		<ol class="num-digit">
+		<?php foreach ($categoria['Categorias'] as $subCategoria): ?>
+			<li>
+			    <span class="resaltado"><?php echo $subCategoria['categoria'] ?></span>
+			    <?php echo ($subCategoria['descripcion']) ? (': ' . $subCategoria['descripcion']) : (""); ?>
+			<?php if (count($subCategoria['Preguntas']) > 0): ?>
+        	    <ol class="num-normal">
+        	    <?php foreach ($subCategoria['Preguntas'] as $pregunta): ?>
+        	        <li>
+        	            <span class="resaltado"><?php echo $pregunta['pregunta'] ?></span>
+        	            <?php echo ($pregunta['descripcion']) ? (': ' . $pregunta['descripcion']) : (""); ?>
+                    </li>
+        	    <?php endforeach; ?>
+        	    </ol>
+        	<?php endif; ?>
+        	</li>
+		<?php endforeach; ?>
+		</ol>
+	<?php endif; ?>
+	</li>
+<?php endforeach; ?>
+</ol>
+<?php endif; ?>

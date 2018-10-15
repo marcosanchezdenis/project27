@@ -1,0 +1,105 @@
+<?php $this->headTitle()->prepend('Encuesta'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/get.css')); ?>
+
+<div class="links">
+<a href="<?php echo $this->baseUrl('/enc/encuesta/index'); ?>">&#x21a9; Volver al Listado</a>
+<?php if ($this->encuesta["activo"] == "N"):?>
+ |
+<a href="editar?id=<?php echo $this->encuesta["enc_particular_id"]; ?>">Editar Encuesta</a>
+ |
+<a href="borrar?id=<?php echo $this->encuesta["enc_particular_id"]; ?>">Borrar Encuesta</a>
+<?php endif; ?>
+</div>
+
+<hr class="separator" />
+
+<?php if ($this->encuesta): ?>
+
+<table class="visualizaciones">
+    <tr>
+        <th colspan="2">Detalles de la Encuesta</th>
+    </tr>
+    <tr>
+        <td class="titulo"><label>Plantilla Utilizada</label></td>
+        <td class="valor">
+            <a target="_blank" href="<?php echo $this->baseUrl("enc/plantilla/get?id=" . $this->encuesta["encuesta_id"]); ?>" title="Vista previa de la Encuesta">
+                <?php echo $this->encuesta["encuesta"]; ?>
+            </a>
+        </td>
+    </tr>
+    <tr>
+        <td class="titulo"><label>Docente</label></td>
+        <td class="valor"><?php echo $this->encuesta["docente"]; ?></td>
+    </tr>
+    <tr>
+        <td class="titulo"><label>Asignatura</label></td>
+        <td class="valor"><?php echo $this->encuesta["asignatura"]; ?></td>
+    </tr>
+    <tr>
+        <td class="titulo"><label>Periodo Lectivo</label></td>
+        <td class="valor"><?php echo $this->encuesta["periodo"]; ?></td>
+    </tr>
+	<tr>
+		<td class="titulo"><label>Contraseña</label></td>
+		<td class="valor"><?php if ($this->encuesta["password"] != ""): echo $this->encuesta["password"]; else: echo "[NO REQUIERE CONTRASEÑA]"; endif; ?></td>
+	</tr>
+	<tr>
+		<td class="titulo"><label>Habilitar encuesta el</label></td>
+		<td class="valor"><?php if ($this->encuesta["fecha_inicio"] != ""): echo $this->encuesta["fecha_inicio"]; else: echo "[SIN RESTRICCIÓN DE INICIO]"; endif; ?></td>
+	</tr>
+	<tr>
+		<td class="titulo"><label>Cerrar encuesta el</label></td>
+		<td class="valor"><?php if ($this->encuesta["fecha_fin"] != ""): echo $this->encuesta["fecha_fin"]; else: echo "[SIN RESTRICCIÓN DE CIERRE]"; endif; ?></td>
+	</tr>
+	<tr>
+		<td class="titulo"><label>MÁX Respuestas</label></td>
+		<td class="valor"><?php if ($this->encuesta["max_resp"] > 0): echo $this->encuesta["max_resp"]; else: echo "[SIN RESTRICCIÓN DE CANTIDAD DE RESPUESTAS]"; endif; ?></td>
+	</tr>
+	<tr>
+		<td class="titulo"><label>Respuestas Totales</label></td>
+		<td class="valor"><?php echo $this->totalEncuestas; ?></td>
+	</tr>
+    <tr>
+        <td class="titulo"><label>Link para completar</label></td>
+        <td class="valor">
+            <?php if ($this->encuesta["activo"] == "S"): ?>
+            <a target="_blank" href="<?php echo $this->baseUrl("resp/encuesta/complete?id=" . $this->encuesta["identificador"]); ?>" title="Completar Encuesta">
+                <?php echo $this->serverUrl(); ?><?php echo $this->baseUrl("resp/encuesta/complete?id=" . $this->encuesta["identificador"]); ?><br />
+            </a>
+            <?php else: ?>
+                <?php echo $this->serverUrl(); ?><?php echo $this->baseUrl("resp/encuesta/complete?id=" . $this->encuesta["identificador"]); ?><br />
+            <?php endif; ?>
+        </td>
+    </tr>
+	<tr>
+		<td class="titulo"><label>URL Corta</label></td>
+		<td class="valor">
+			<a target="_blank" href="<?php echo $this->shortUrl; ?>" title="URL Corta">
+				<?php echo $this->shortUrl; ?><br />
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td class="titulo"><label>Informe</label></td>
+
+		<td class="valor">
+			<a target="_blank" href="<?php echo $this->baseUrl("inf/docente/ver-informe?id=" . $this->encuesta["enc_particular_id"]); ?>">
+				<?php echo $this->serverUrl() . $this->baseUrl("inf/docente/ver-informe?id=" . $this->encuesta["enc_particular_id"]); ?>
+			</a>
+		</td>
+	</tr>
+</table>
+
+<?php endif; ?>
+
+<hr class="separator" />
+
+<div class="links">
+<a href="<?php echo $this->baseUrl('/enc/encuesta/index'); ?>">&#x21a9; Volver al Listado</a>
+<?php if ($this->encuesta["activo"] == "N"):?>
+ |
+<a href="editar?id=<?php echo $this->encuesta["enc_particular_id"]; ?>">Editar Encuesta</a>
+ |
+<a href="borrar?id=<?php echo $this->encuesta["enc_particular_id"]; ?>">Borrar Encuesta</a>
+<?php endif; ?>
+</div>

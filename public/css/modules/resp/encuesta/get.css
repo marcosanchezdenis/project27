@@ -1,0 +1,114 @@
+h3.encuesta-title {
+    text-align: center;
+    color: #223359;
+    font-weight: bold;
+    text-transform: uppercase;
+    width:90%;
+}
+
+div.escala-utilizada {
+	margin: auto;
+	width: 90%
+}
+
+div.escala-utilizada h5 {
+	float: left;
+	color: #223359;
+	font-weight: bold;
+}
+
+ul.escala {
+	float: left;
+	padding: 0px;
+	list-style: none;
+	width: auto;
+}
+
+ul.escala li {
+	display: inline;
+	text-align: center;
+	width: auto;
+}
+
+span.separator {
+	margin: 10px;
+	width: auto;
+}
+
+table.encuesta { border: 1px solid black; }
+table.encuesta tbody tr:nth-child(even) td, tbody tr.even td {background:none;}
+table.encuesta tr td {
+	border: 1px solid black;
+}
+
+table.encuesta th {
+	border: 1px solid black;
+    background-color: #909090;
+}
+
+table.encuesta tr.categoria td {
+	background-color: #909090;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+table.encuesta tr.subcategoria td {
+	background-color: #C4C4C4;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+table.encuesta tr.pregunta-abierta td {
+	height: 50px;
+	vertical-align: text-top;
+	width: auto;
+}
+
+table.encuesta tr.pregunta-seleccion td {
+	border-bottom: 0px;
+}
+
+table.encuesta tr.pregunta-seleccion .opciones {
+    border-top: 0px;
+	font-style: italic;
+	text-transform: lowercase;
+}
+
+table.encuesta tr.pregunta-escala td {
+    
+}
+
+table.encuesta td.answer-field {
+	width: 10%;
+}
+
+table.encuesta thead tr th.answer-field {
+	width: 10%;
+}
+
+table.encuesta td.enum {
+    width: 5%;
+	text-align: center;
+	vertical-align: text-top;
+}
+
+div.links {
+	text-align: center;
+	color: #223359;
+}
+
+div.links a {
+	color: #223359;
+	text-decoration: none;
+	margin: 0px 5px;
+	padding: 5px 10px;
+}
+
+div.links a:hover {
+    border-bottom: 1px solid #BDBDBD;
+}
+
+table input:focus, table textarea:focus, table select:focus {
+	background-color: #DADAD4;
+	font-weight: bold;
+}

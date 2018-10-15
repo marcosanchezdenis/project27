@@ -1,0 +1,188 @@
+<?php $this->headTitle()->prepend('Estructura'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/get.css')); ?>
+
+<div class="links">
+<a href="<?php echo $this->baseUrl('enc/plantilla/index'); ?>">&#x21a9; Volver al Listado</a>
+<?php if ($this->plantilla["activo"] == "N"):?>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/editar?id=' . $this->plantilla['encuesta_id']); ?>">Modificar Datos Principales</a>
+ | 
+<a href="<?php echo $this->baseUrl('enc/plantilla/estructura?id=' . $this->plantilla['encuesta_id']); ?>">Modificar Estructura</a>
+<?php endif; ?>
+</div>
+
+<hr class="separator" />
+
+<div><h3 class="encuesta-title"><?php echo $this->plantilla["encuesta"]; ?></h3></div>
+
+<div class="escala-utilizada">
+	<h5>Escala:<span class="separator"></span></h5>
+	<ul class="escala">
+	<?php foreach ($this->plantilla["valores"] as $valor): ?>
+		<li><span class="separator"></span><b><?php echo '(' . $valor["valor"] . ') '; ?></b><?php echo $valor["descrip"]; ?></li>
+	<?php endforeach; ?>
+	</ul>
+</div>
+
+<table class="encuesta">
+	<thead>
+		<tr><th colspan="2"></th><th class="answer-field">CALIFICACION</th></tr>
+	</thead>
+	<tbody>
+	<?php $catEnum = 65; $pregEnum = 1; ?>
+	<?php foreach ($this->plantilla["Categorias"] as $categoria): ?>
+		<tr class="categoria">
+			<td colspan="3"><?php echo chr($catEnum) . '. ' . $categoria["categoria"]; ?></td>
+		</tr>
+		<tbody>
+			<?php foreach ($categoria["Preguntas"] as $catPregunta): ?>
+			<?php if ($catPregunta["tipo"] == 'A'): ?>
+			<tr class="pregunta-abierta">
+			    <td class="enum">
+			        <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+    			        <span class="required-field"> * </span>
+    			    <?php endif; ?>
+    			    <?php echo $pregEnum++; ?>
+			    </td>
+				<td colspan="2">
+				    <?php echo $catPregunta["pregunta"]; ?>
+			    </td>
+			</tr>
+			<?php elseif ($catPregunta["tipo"] == 'E'): ?>
+			<tr class="pregunta-escala">
+				<td class="enum">
+				    <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+    			        <span class="required-field"> * </span>
+    			    <?php endif; ?>
+    			    <?php echo $pregEnum++; ?>
+			    </td>
+				<td><?php echo $catPregunta["pregunta"]; ?></td>
+				<td class="answer-field"></td>
+			</tr>
+			<?php elseif ($catPregunta["tipo"] == 'S'): ?>
+			<tr class="pregunta-seleccion">
+				<td class="enum" rowspan="2">
+				    <?php if ($catPregunta["es_obligatoria"] == "S"): ?>
+    			        <span class="required-field"> * </span>
+    			    <?php endif; ?>
+    			    <?php echo $pregEnum++; ?>
+			    </td>
+				<td colspan="2"><?php echo $catPregunta["pregunta"]; ?></td>
+			</tr>
+			<tr class="pregunta-seleccion">
+				<td colspan="2" class="opciones">
+					<?php foreach ($catPregunta["Opciones"] as $opcion): ?>
+						<span class="separator"></span>
+						<?php echo $opcion["valor"] . ' (' . $opcion["nombre"] . ')'; ?>
+						<br />
+					<?php endforeach; ?>
+				</td>
+			</tr>
+			<?php endif; ?>
+			<?php endforeach; ?>
+		</tbody>
+		<tbody>
+		<?php $subCatEnum = 1; ?>
+		<?php foreach ($categoria["Categorias"] as $subCategoria): ?>
+			<tr class="subcategoria">
+				<td colspan="3"><?php echo chr($catEnum) . '.' . $subCatEnum . '. ' . $subCategoria["categoria"]; ?></td>
+			</tr>
+			<tbody>
+				<?php foreach ($subCategoria["Preguntas"] as $subPregunta): ?>
+				<?php if ($subPregunta["tipo"] == 'A'): ?>
+				<tr class="pregunta-abierta">
+				    <td class="enum">
+				        <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+        			        <span class="required-field"> * </span>
+        			    <?php endif; ?>
+        			    <?php echo $pregEnum++; ?>
+				    </td>
+					<td colspan="2">
+    			        <?php echo $subPregunta["pregunta"]; ?>
+			        </td>
+				</tr>
+				<?php elseif ($subPregunta["tipo"] == 'E'): ?>
+				<tr class="pregunta-escala">
+					<td class="enum">
+					    <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+        			        <span class="required-field"> * </span>
+        			    <?php endif; ?>
+        			    <?php echo $pregEnum++; ?>
+    			    </td>
+					<td><?php echo $subPregunta["pregunta"]; ?></td>
+					<td class="answer-field"></td>
+				</tr>
+				<?php elseif ($subPregunta["tipo"] == 'S'): ?>
+				<tr class="pregunta-seleccion">
+					<td class="enum" rowspan="2">
+					    <?php if ($subPregunta["es_obligatoria"] == "S"): ?>
+        			        <span class="required-field"> * </span>
+        			    <?php endif; ?>
+        			    <?php echo $pregEnum++; ?>
+    			    </td>
+					<td colspan="2"><?php echo $subPregunta["pregunta"]; ?></td>
+				</tr>
+				<tr class="pregunta-seleccion">
+					<td colspan="2" class="opciones">
+						<?php foreach ($subPregunta["Opciones"] as $opcion): ?>
+						    <span class="separator"></span>
+							<?php echo $opcion["valor"] . ' (' . $opcion["nombre"] . ')'; ?>
+							<br />
+						<?php endforeach; ?>
+					</td>
+				</tr>
+				<?php endif; ?>
+				<?php endforeach; ?>
+			</tbody>
+		<?php $subCatEnum++; ?>
+		<?php endforeach; ?>
+		</tbody>
+		<?php $catEnum++; ?>
+	<?php endforeach; ?>
+	<?php foreach ($this->plantilla["Preguntas"] as $pregunta): ?>
+		<?php if ($pregunta["tipo"] == 'A'): ?>
+		<tr class="pregunta-abierta">
+		    <td class="enum">
+		        <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+		    </td>
+			<td colspan="2">
+		        <?php echo $pregunta["pregunta"]; ?>
+	        </td>
+		</tr>
+		<?php elseif ($pregunta["tipo"] == 'E'): ?>
+		<tr class="pregunta-escala">
+			<td class="enum">
+			    <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+		    </td>
+			<td><?php echo $pregunta["pregunta"]; ?></td>
+			<td class="answer-field"></td>
+		</tr>
+		<?php elseif ($pregunta["tipo"] == 'S'): ?>
+		<tr class="pregunta-seleccion">
+			<td class="enum" rowspan="2">
+			    <?php if ($pregunta["es_obligatoria"] == "S"): ?>
+			        <span class="required-field"> * </span>
+			    <?php endif; ?>
+			    <?php echo $pregEnum++; ?>
+		    </td>
+			<td colspan="2"><?php echo $pregunta["pregunta"]; ?></td>
+		</tr>
+		<tr class="pregunta-seleccion">
+			<td colspan="2" class="opciones">
+			    <?php foreach ($pregunta["Opciones"] as $opcion): ?>
+				    <span class="separator"></span>
+					<?php echo $opcion["valor"] . ' (' . $opcion["nombre"] . ')'; ?>
+					<br />
+				<?php endforeach; ?>
+			</td>
+		</tr>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</tbody>
+</table>

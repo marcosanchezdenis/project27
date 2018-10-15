@@ -1,0 +1,40 @@
+<?php $this->headTitle()->prepend('Agregar Asignatura'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/ins/asignatura/crear.css')); ?>
+
+<form action="crear" method="post">
+	<fieldset>
+		<legend>DATOS DE LA ASIGNATURA</legend>
+		
+		<input type="hidden" name="asignatura_id" id="asignatura_id" value="<?php echo $this->asignatura["asignatura_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="N" />
+		<input type="hidden" name="codigo" id="codigo" value="" />
+		
+		<label for="nombre">ASIGNATURA<span class="required-field"> * </span></label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->asignatura["nombre"]; ?>" required="required" /><br />
+		
+		<label for="carrera_id">CARRERA<span class="required-field"> * </span></label>
+		<select id="carrera_id" name="carrera_id" tabindex="2">
+		    <option <?php echo ($this->asignatura["carrera_id"] == "none" ? 'selected="selected"' : null); ?> value="none">-- Seleccione una carrera --</option>
+		    <?php foreach ($this->carreras as $carrera): ?>
+		        <option value="<?php echo $carrera["carrera_id"] ?>" <?php echo ($this->asignatura["carrera_id"] == $carrera["carrera_id"] ? 'selected="selected"' : null); ?>><?php echo $carrera["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<div class="center">
+    		<input type="submit" name="crear" id="crear" value="CREAR" tabindex="2" />
+    		<a href="<?php echo $this->baseUrl('/ins/asignatura/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		</div>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

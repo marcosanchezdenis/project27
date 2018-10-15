@@ -1,0 +1,26 @@
+<?php $this->headTitle()->prepend('Encuestas'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/index.css')); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+
+<br/>
+
+<form action="informe" method="get">
+	<fieldset>
+		<label for="materia_id">MATERIA</label>
+		<select id="materia_id" name="materia_id" tabindex="2">
+			<option value="<?php echo $this->asignatura["asignatura_id"]; ?>" selected="selected"><?php echo $this->asignatura["nombre"]; ?></option>
+		</select><br />
+
+		<label for="periodo_lectivo_id">PERIODO LECTIVO</label>
+		<select id="periodo_lectivo_id" name="periodo_lectivo_id" tabindex="3">
+			<?php foreach ($this->periodos as $periodo): ?>
+				<option value="<?php echo $periodo["periodo_lectivo_id"]; ?>"><?php echo $periodo["periodo"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+
+		<div class="center">
+			<input type="submit" name="act" id="verinf" value="Ver Informe" tabindex="4" />
+			<input type="submit" name="act" id="geninf" value="Generar" tabindex="5" />
+		</div>
+	</fieldset>
+</form>

@@ -1,0 +1,53 @@
+<?php $this->headTitle()->prepend('Informes del Departamento'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/get.css')); ?>
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/inf/departamento/index'); ?>">&#x21a9; Volver al Listado</a>
+</div>
+
+<hr class="separator" />
+
+<?php if ($this->departamento): ?>
+
+    <table class="visualizaciones">
+        <tr>
+            <th width="40%">DEPARTAMENTO</th>
+            <th width="20%">CODIGO</th>
+            <th width="40%">FACULTAD</th>
+        </tr>
+        <tr>
+            <td><?php echo $this->departamento["departamento"]; ?></td>
+            <td style="text-align: center;"><?php echo $this->departamento["codigo"]; ?></td>
+            <td><?php echo $this->departamento["facultad"]; ?></td>
+        </tr>
+    </table>
+    
+    <dl>
+    <?php if (count($this->informList)): ?>
+        <dt>Informes del Departamento</dt>
+        <?php foreach ($this->informList as $informe): ?>
+            <dd>
+                <li class="report">
+					<?php echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" . $informe['periodo'] . ' - ' . $informe["encuesta"]; ?>
+                    <br/>
+					<a class="get-link" href="ver-informe?id=<?php echo $informe["enc_particular_id"]; ?>">
+						Ver Informe
+					</a> &nbsp;&nbsp; &nbsp;&nbsp; |
+					<a class="get-link" href="gen-informe?id=<?php echo $informe["enc_particular_id"]; ?>">
+						Generar Informe
+					</a>
+                </li>
+            </dd>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <dt>El departamento no tiene informes</dt>
+    <?php endif; ?>
+    </dl>
+
+<?php endif; ?>
+
+<hr class="separator" />
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/inf/departamento/index'); ?>">&#x21a9; Volver al Listado</a>
+</div>

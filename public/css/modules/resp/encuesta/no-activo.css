@@ -1,0 +1,12 @@
+div.center {
+	width: 100%;
+	margin: 50px auto;
+	text-align: center;
+	font-weight: bold;
+	color: #223359;
+}
+
+#cerrar {
+	cursor: pointer;
+	color: #223359;
+}

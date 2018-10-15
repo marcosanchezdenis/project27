@@ -1,0 +1,60 @@
+<?php $this->headTitle()->prepend('Escalas'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/index.css')); ?>
+
+<a class="standard-button" href="crear" title="Crear Nueva Escala">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ESCALA
+</a>
+
+<br />
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->results)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin escalas.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th>ESCALA</th>
+                <th>DESCRIPCION</th>
+                <th>EDITAR</th>
+                <th>ELIMINAR</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->results as $escala): ?>
+            <tr>
+                <td><a class="get-link" href="get?id=<?php echo $escala["escala_id"]; ?>"><?php echo $escala["nombre"]; ?></a></td>
+                <td><?php echo $escala["descripcion"]; ?></td>
+                <td style="text-align: center">
+            	<?php if ($escala["usado"] > 0): ?>
+                	<a title="La escala esta siendo utilizada en alguna plantilla">
+				<?php else: ?>
+                    <a href="editar?id=<?php echo $escala["escala_id"]; ?>" title="Clic para editar">
+                <?php endif; ?>
+                        <img src="<?php echo $this->baseUrl(); ?>/images/page_edit.png" />
+                    </a>
+                </td>
+                <td style="text-align: center">
+                <?php if ($escala["usado"] > 0): ?>
+                    <a title="La escala esta siendo utilizada en alguna plantilla">
+            	<?php else: ?>
+                	<a href="borrar?id=<?php echo $escala["encuesta_id"]; ?>" title="Clic para borrar">
+                    <?php endif; ?>
+                	    <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                	</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>
+
+<a class="standard-button" href="crear" title="Crear Nueva Escala">
+    <img alt="New" src="<?php echo $this->baseUrl('images/button_add.png'); ?>">
+    CREAR ESCALA
+</a>

@@ -1,0 +1,66 @@
+<?php $this->headTitle()->prepend('Detalle Docente'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/encuesta/get.css')); ?>
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/adm/docente/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->docente["activo"] == "N"):?>
+     | 
+    <a href="<?php echo $this->baseUrl('/adm/docente/editar?id=' . $this->docente['docente_id']); ?>">Editar Docente</a>
+    <?php endif; ?>
+</div>
+
+<hr class="separator" />
+
+<?php if ($this->docente): ?>
+
+    <table class="visualizaciones">
+        <tr>
+            <th width="20%">CODIGO</th>
+            <th width="25%">NOMBRE</th>
+            <th width="25%">APELLIDO</th>
+            <th width="20%">CONTACTO</th>
+            <th width="10%">ACTIVO</th>
+        </tr>
+        <tr>
+            <td style="text-align: center;"><?php echo $this->docente["codigo"]; ?></td>
+            <td><?php echo $this->docente["nombre"]; ?></td>
+            <td><?php echo $this->docente["apellido"]; ?></td>
+            <?php if ($this->docente["email"] != ""): ?>
+                <td>
+                    <?php echo $this->docente["email"]; ?>
+                </td>
+            <?php else: ?>
+                <td style="text-align: center;">
+                    <?php echo "No tiene"; ?>
+                </td>
+            <?php endif; ?>
+            <td style="text-align: center;">
+                <?php if ($this->docente["activo"] == "S"): ?>
+                    <?php echo "S&iacute;"; ?>
+                <?php else: ?>
+                    <?php echo "No"; ?>
+                <?php endif; ?>
+            </td>
+        </tr>
+    </table>
+    
+    <?php if (count($this->docente['departamentos'])): ?>
+    <dl>
+        <dt>Departamentos Asignados</dt>
+        <?php foreach ($this->docente['departamentos'] as $departamento): ?>
+            <li><dd><?php echo $departamento['departamento']; ?></dd></li>
+        <?php endforeach; ?>
+    </dl>
+    <?php endif; ?>
+
+<?php endif; ?>
+
+<hr class="separator" />
+
+<div class="links">
+    <a href="<?php echo $this->baseUrl('/adm/docente/index'); ?>">&#x21a9; Volver al Listado</a>
+    <?php if ($this->docente["activo"] == "N"):?>
+     | 
+    <a href="<?php echo $this->baseUrl('/adm/docente/editar?id=' . $this->docente['docente_id']); ?>">Editar Docente</a>
+    <?php endif; ?>
+</div>

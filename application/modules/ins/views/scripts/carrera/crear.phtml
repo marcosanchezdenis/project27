@@ -1,0 +1,41 @@
+<?php $this->headTitle()->prepend('Agregar Carrera'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/ins/asignatura/crear.css')); ?>
+
+<form action="crear" method="post">
+	<fieldset>
+		<legend>DATOS DE LA CARRERA</legend>
+		
+		<input type="hidden" name="carrera_id" id="carrera_id" value="<?php echo $this->carrera["carrera_id"]; ?>" />
+		
+		<label for="nombre">CARRERA<span class="required-field"> * </span></label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->carrera["nombre"]; ?>" required="required" /><br />
+		
+		<label for="codigo">CODIGO<span class="required-field"> * </span></label>
+		<input type="text" name="codigo" id="codigo" tabindex="2" value="<?php echo $this->carrera["codigo"]; ?>" required="required" /><br />
+		
+		<label for="departamento_id">DEPARTAMENTO<span class="required-field"> * </span></label>
+		<select id="departamento_id" name="departamento_id" tabindex="3">
+		    <option <?php echo ($this->carrera["departamento_id"] == "none" ? 'selected="selected"' : null); ?> value="none">-- Seleccione un departamento --</option>
+		    <?php foreach ($this->departamentos as $departamento): ?>
+		        <option value="<?php echo $departamento["departamento_id"] ?>" <?php echo ($this->carrera["departamento_id"] == $departamento["departamento_id"] ? 'selected="selected"' : null); ?>><?php echo $departamento["nombre"]; ?></option>
+		    <?php endforeach; ?>
+		</select><br />
+		
+		<div class="center">
+    		<input type="submit" name="crear" id="crear" value="CREAR" tabindex="4" />
+    		<a href="<?php echo $this->baseUrl('/ins/carrera/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		</div>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

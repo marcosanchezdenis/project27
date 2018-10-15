@@ -1,0 +1,79 @@
+<?php $this->headTitle()->prepend('Nuevo Usuario'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/adm/usuario/crear.css')); ?>
+<?php $this->headScript()->appendFile($this->baseUrl('js/modules/adm/usuario/crear.js')); ?>
+
+<form id="crear-usuario" action="crear" method="post">
+
+    <div class="half-screen">
+        <fieldset>
+            <legend>DATOS PERSONALES</legend>
+            
+            <input type="hidden" name="usuario_id" id="usuario_id" value="<?php echo $this->usuario["usuario_id"]; ?>" />
+    		<input type="hidden" name="persona_id" id="persona_id" value="<?php echo $this->usuario["persona_id"]; ?>" />
+    		<input type="hidden" name="activo" id="activo" value="N" />
+    		
+    		<label for="nombre">NOMBRE<span class="required-field"> * </span></label>
+    		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->usuario["nombre"]; ?>" />
+    		<span id="nombreInfo"></span><br />
+    		
+    		<label for="apellido">APELLIDO<span class="required-field"> * </span></label>
+    		<input type="text" name="apellido" id="apellido" tabindex="2" value="<?php echo $this->usuario["apellido"]; ?>" />
+    		<span id="apellidoInfo"></span><br />
+    		
+    		<label for="email">EMAIL</label>
+    		<input type="text" name="email" id="email" tabindex="3" value="<?php echo $this->usuario["email"]; ?>" />
+    		<span id="emailInfo"></span><br />
+    		
+    		<label for="es_docente">ES DOCENTE</label>
+    		<input type="checkbox" name="es_docente" id="es_docente" tabindex="4" align="middle" />
+	    </fieldset>
+    </div>
+	
+	<div class="half-screen">
+    	<fieldset>
+    		<legend>DATOS DE USUARIO</legend>
+    		
+    		<label for="usuario">USUARIO<span class="required-field"> * </span></label>
+    		<input type="text" name="usuario" id="usuario" tabindex="5" value="<?php echo $this->usuario["usuario"]; ?>" />
+    		<span id="usuarioInfo"></span><br />
+    		
+    		<label for="contrasena">CONTRASE&Ntilde;A<span class="required-field"> * </span></label>
+    		<input type="password" name="contrasena" id="contrasena" tabindex="6" value="<?php echo $this->usuario["contrasena"]; ?>" />
+    		<span id="contrasenaInfo"></span><br />
+    		
+    		<label for="confirmacion">CONFIRMACI&Oacute;N</label>
+    		<input type="password" name="confirmacion" id="confirmacion" tabindex="7" value="<?php echo $this->usuario["confirmacion"]; ?>" />
+    		<span id="confirmacionInfo"></span><br />
+        </fieldset>
+	</div>
+	
+	<fieldset>
+		<legend>ASIGNACI&Oacute;N DE ROLES</legend>
+		
+		<div id="nuevos-roles"></div>
+		<div id="buttons">
+    		<a name="agregar-rol" id="agregar-rol">AGREGAR ROL</a>
+    		|
+    		<a name="borrar-rol" id="borrar-rol">ELIMINAR ROL</a>
+    		|
+    		<a name="borrar-todo" id="borrar-todo">ELIMINAR TODOS</a>
+		</div>
+	</fieldset>
+	
+	<div class="center">
+    	<input type="submit" name="crear" id="crear" value="CREAR" tabindex="8" />
+    	<a href="<?php echo $this->baseUrl('/adm/usuario/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+	</div>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>

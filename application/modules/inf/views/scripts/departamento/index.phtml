@@ -1,0 +1,46 @@
+<?php $this->headTitle()->prepend('Departamentos'); ?>
+<?php $this->headLink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/index.css')); ?>
+
+<div style="margin: 15px auto;">
+    <?php if (!count($this->departamentos)): ?>
+    <div class="warning">
+        <img width="50px" alt="Aviso" src="<?php echo $this->baseUrl('images/warning.png'); ?>">
+        <br /><h4>Sin departamentos.</h4>
+    </div>
+    <?php else: ?>
+    <table>
+        <thead>
+            <tr>
+                <th width="40%">DEPARTAMENTO</th>
+                <th width="20%">CODIGO</th>
+                <th width="40%">FACULTAD</th>
+                <!--<th width="10%">INFORMES</th>
+                <th width="10%">ELIMINAR</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->departamentos as $departamento): ?>
+            <tr>
+                <td>
+                    <a class="get-link" href="get?id=<?php echo $departamento["departamento_id"]; ?>">
+                        <?php echo $departamento["nombre"]; ?>
+                    </a>
+                </td>
+                <td style="text-align: center;"><?php echo $departamento["codigo"]; ?></td>
+                <td><?php echo $departamento["facultad"]; ?></td>
+                <!--<td style="text-align: center;">
+                    <a href="get?id=<?php echo $departamento["departamento_id"]; ?>">
+                        <img src="<?php echo $this->baseUrl(); ?>/images/report.png" />
+                    </a>
+                </td>
+                <td style="text-align: center;">
+                    <a href="borrar?id=<?php echo $departamento["departamento_id"]; ?>">
+                        <img src="<?php echo $this->baseUrl(); ?>/images/page_delete.png" />
+                    </a>
+                </td>-->
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+    <?php endif; ?>
+</div>

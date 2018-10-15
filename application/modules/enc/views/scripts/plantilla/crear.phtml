@@ -1,0 +1,42 @@
+<?php $this->headTitle()->prepend('Datos Principales'); ?>
+<?php $this->headlink()->appendStylesheet($this->baseUrl('css/modules/enc/plantilla/datos-principales.css')); ?>
+
+<form action="crear" method="post">
+	<fieldset>
+		<legend>DATOS PRINCIPALES</legend>
+		
+		<input type="hidden" name="encuesta_id" id="encuesta_id" value="<?php echo $this->encuesta["encuesta_id"]; ?>" />
+		<input type="hidden" name="activo" id="activo" value="N" />
+		
+		<label for="nombre">NOMBRE<span class="required-field"> * </span></label>
+		<input type="text" name="nombre" id="nombre" tabindex="1" value="<?php echo $this->encuesta["nombre"]; ?>" required="required" /><br />
+		
+		<label for="descripcion">DESCRIPCION</label>
+		<textarea name="descripcion" rows="3" cols="50" tabindex="2"><?php echo $this->encuesta["descripcion"]; ?></textarea><br />
+		
+		<label for="escala_id">ESCALA<span class="required-field"> * </span></label>
+		<select id="escala_id" name="escala_id" tabindex="3">
+		    <option <?php echo ($this->encuesta["escala_id"] == "none" ? 'selected="selected"' : null); ?> value="none">-- Seleccione una escala --</option>
+			<?php foreach ($this->escalas as $escala): ?>
+				<option value="<?php echo $escala["escala_id"]; ?>" <?php echo ($this->encuesta["escala_id"] == $escala["escala_id"] ? 'selected="selected"' : null); ?>><?php echo $escala["nombre"]; ?></option>
+			<?php endforeach; ?>
+		</select><br />
+		
+		<div class="center">
+    		<input type="submit" name="crear" id="crear" value="CREAR" tabindex="4" />
+    		<a href="<?php echo $this->baseUrl('/enc/plantilla/index'); ?>"><button type="button" name="cancelar" id="cancelar">CANCELAR</button></a>
+		</div>
+	</fieldset>
+</form>
+
+<?php if ($this->errors): ?>
+<div class="error">
+	<ul>
+    <?php foreach ($this->errors as $fieldErrors): ?>
+	    <?php foreach ($fieldErrors as $error): ?>
+    		<li><?php echo $error; ?></li>
+    	<?php endforeach; ?>
+    <?php endforeach; ?>
+    </ul>
+</div>
+<?php endif; ?>
